@@ -13,7 +13,7 @@ const Layout = ({
   const pathname = usePathname();
 
   const isAdminPage = useMemo(
-    () => pathname === "/controller" || pathname === "/auth",
+    () => pathname.includes("/controller") || pathname === "/auth",
     [pathname]
   );
 

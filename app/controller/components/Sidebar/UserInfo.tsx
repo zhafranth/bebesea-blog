@@ -1,4 +1,7 @@
+"use client";
+
 import { Avatar, Button, Divider } from "@nextui-org/react";
+import { signOut } from "next-auth/react";
 import React from "react";
 import { MdLogout } from "react-icons/md";
 
@@ -23,6 +26,7 @@ const UserInfo = () => {
         fullWidth
         radius="full"
         startContent={<MdLogout />}
+        onClick={() => signOut()}
       >
         Logout
       </Button>

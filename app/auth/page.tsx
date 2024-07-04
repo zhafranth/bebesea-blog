@@ -1,10 +1,35 @@
+"use client";
+
 import { Button, Input, Link } from "@nextui-org/react";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 
 const Auth = () => {
+  const [payload, setPayload] = useState({
+    username: null,
+    password: null,
+  });
+
+  const handleLogin = useCallback(
+    async (payload: { username: string; password: string }) =>
+      await signIn("credentials", {
+        ...payload,
+        redirect: true,
+        callbackUrl: "/controller",
+      }),
+    []
+  );
+
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>, key: string) => {
+      setPayload((prevState) => ({ ...prevState, [key]: event.target.value }));
+    },
+    []
+  );
+
   return (
     <main id="auth">
       <div className="flex h-screen box-border">
@@ -34,6 +59,7 @@ const Auth = () => {
               type="text"
               placeholder="Username"
               endContent={<FaUser />}
+              onChange={(event) => handleChange(event, "username")}
             />
             <Input
               label="Password"
@@ -41,11 +67,13 @@ const Auth = () => {
               type="password"
               placeholder="Password"
               endContent={<RiLockPasswordFill />}
+              onChange={(event) => handleChange(event, "password")}
             />
             <Button
               color="warning"
               radius="full"
               className="text-white w-full mt-14"
+              onPress={() => handleLogin(payload)}
             >
               Login
             </Button>

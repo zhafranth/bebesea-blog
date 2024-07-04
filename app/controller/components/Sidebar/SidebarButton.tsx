@@ -2,7 +2,7 @@
 
 import { cn } from "@/utils/cn";
 import { Button } from "@nextui-org/react";
-import { useParams, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useMemo } from "react";
 
 const SidebarButton = ({
@@ -13,11 +13,14 @@ const SidebarButton = ({
   const { path, icon, label } = data;
 
   const router = useRouter();
-  const { entity } = useParams<{ entity: string }>();
+
+  const pathname = usePathname();
+
+  const entity = useMemo(() => pathname.split("/")[2], [pathname]);
 
   const isActive = useMemo(() => {
     return path === entity;
-  }, [entity, path]);
+  }, [path, entity]);
 
   return (
     <Button

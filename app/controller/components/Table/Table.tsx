@@ -34,10 +34,15 @@ const Table = ({
   const renderCell = useCallback(
     (data: dataType, columnKey: React.Key) => {
       const column = columns.find((item) => item.key === columnKey)?.render;
+      const value =
+        typeof data[columnKey as keyof dataType] === "object"
+          ? "-"
+          : data[columnKey as keyof dataType];
+
       if (column) {
         return column(data);
       }
-      return <p className="text-white">{data[columnKey as keyof dataType]}</p>;
+      return <p className=" text-xs">{value}</p>;
     },
     [columns]
   );
@@ -61,7 +66,9 @@ const Table = ({
         {(item) => (
           <TableRow key={item.id}>
             {(columnKey) => (
-              <TableCell>{renderCell(item, columnKey)}</TableCell>
+              <TableCell className="text-slate-700">
+                {renderCell(item, columnKey)}
+              </TableCell>
             )}
           </TableRow>
         )}

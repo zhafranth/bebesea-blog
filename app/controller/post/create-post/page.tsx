@@ -19,6 +19,7 @@ import { parseDate } from "@internationalized/date";
 import { useGetUsers, usePost } from "../../actions/hooks";
 import { PostPayload } from "../../actions/interface";
 import { useRouter } from "next/navigation";
+import Upload from "@/components/molecules/Upload";
 
 const CreatePost = () => {
   const { data: users = [] } = useGetUsers();
@@ -40,6 +41,7 @@ const CreatePost = () => {
     is_comment: boolean;
     author?: string;
     content?: string;
+    cover?: string;
   }>({
     defaultValues: {
       status: "draft",
@@ -88,7 +90,7 @@ const CreatePost = () => {
           }
         />
         {/* <Button type="submit">Submit</Button> */}
-        <div className="mt-12 mb-2 flex flex-col gap-y-4">
+        <div className="mt-12 flex flex-col gap-y-4">
           <form.Field
             name="title"
             validators={{
@@ -275,6 +277,33 @@ const CreatePost = () => {
               }}
             </form.Field>
           </div>
+        </div>
+        <div className="my-2">
+          <form.Field
+            name="cover"
+            validators={{
+              onChange: ({ value }) =>
+                !value ? "This field is required" : undefined,
+            }}
+          >
+            {(field) => {
+              return (
+                <div className="w-[100%] mb-5">
+                  <p className="text-sm font-bold mb-2">Upload Cover</p>
+                  <Upload
+                    name={field.name}
+                    onChange={(value) => field.handleChange(value as string)}
+                    value={field.state.value || ""}
+                  />
+                  {field.state.meta.errors.map((item, index) => (
+                    <p className="text-danger-400 mt-1 text-xs" key={index}>
+                      {item}
+                    </p>
+                  ))}
+                </div>
+              );
+            }}
+          </form.Field>
         </div>
         <div>
           <form.Field name="content">

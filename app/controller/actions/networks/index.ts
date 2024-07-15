@@ -9,7 +9,7 @@ import { PostPayload, UserPayload } from "../interface";
 
 export const getUsers = async () => {
   const response = await actionGetUsers();
-  return response.data;
+  return response;
 };
 
 export const createPost = async (data: PostPayload) => {
@@ -21,9 +21,10 @@ export const createUser = async (data: UserPayload) => {
   return response;
 };
 
-export const getPosts = async () => {
-  const response: { data: any; status: number } = await actionGetPosts();
-  return response.data;
+export const getPosts = async (params?: { page: number }) => {
+  const response: { data: any; status: number; total: number } =
+    await actionGetPosts(params);
+  return response;
 };
 
 export const delPost = async (id: string) => {

@@ -52,19 +52,19 @@ export const usePost = () => {
   return { mutateCreatePost, pendingCreate, mutateDeletePost, pendingDelete };
 };
 
-export const useGetPosts = () => {
+export const useGetPosts = (params?: { page: number }) => {
   return useQuery({
     queryKey: ["posts"],
-    queryFn: getPosts,
+    queryFn: () => getPosts(params),
   });
 };
 
-export const useGetTableList = (entity: string) => {
+export const useGetTableList = (entity: string, params?: { page: number }) => {
   return useQuery({
-    queryKey: ["table-list", entity],
+    queryKey: ["table-list", entity, params],
     queryFn: () => {
       if (entity === "post") {
-        return getPosts();
+        return getPosts(params);
       }
       if (entity === "users") {
         return getUsers();

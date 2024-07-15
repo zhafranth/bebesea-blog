@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import {
+  Pagination,
   Spinner,
   TableBody,
   TableCell,
@@ -11,6 +12,7 @@ import {
   TableRow,
 } from "@nextui-org/react";
 import { BsDatabaseAdd } from "react-icons/bs";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 type dataType = {
   id: string | number;
@@ -21,6 +23,8 @@ const Table = ({
   data,
   columns,
   isLoading,
+  isPagination = false,
+  total = 0,
 }: {
   isLoading: boolean;
   data?: dataType[];
@@ -30,7 +34,30 @@ const Table = ({
     width?: string;
     render?: (data?: any) => React.ReactNode | React.JSX.Element;
   }[];
+  isPagination?: boolean;
+  total?: number;
 }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
+  const handleChangePage = useCallback(
+    (value: number) => {
+      setCurrentPage(value);
+      const params = new URLSearchParams(searchParams);
+      if (value) {
+        params.set("page", value as unknown as string);
+      } else {
+        params.delete("page");
+      }
+
+      replace(`${pathname}?${params.toString()}`);
+    },
+    [pathname, replace, searchParams]
+  );
+
   const renderCell = useCallback(
     (data: dataType, columnKey: React.Key) => {
       const column = columns.find((item) => item.key === columnKey)?.render;
@@ -48,32 +75,55 @@ const Table = ({
   );
 
   return (
-    <TableNext aria-label="Example table with dynamic content" className="mt-8">
-      <TableHeader columns={columns}>
-        {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
-      </TableHeader>
-      <TableBody
-        items={data || []}
-        isLoading={isLoading}
-        loadingContent={<Spinner label="Loading..." />}
-        emptyContent={
-          <div className="flex justify-center items-center flex-col">
-            <BsDatabaseAdd size={32} />
-            <h1>No Data</h1>
-          </div>
-        }
+    <>
+      <TableNext
+        aria-label="Example table with dynamic content"
+        className="mt-8"
+        isStriped
+        classNames={{
+          wrapper: "min-h-[75vh]",
+        }}
       >
-        {(item) => (
-          <TableRow key={item.id}>
-            {(columnKey) => (
-              <TableCell className="text-slate-700">
-                {renderCell(item, columnKey)}
-              </TableCell>
-            )}
-          </TableRow>
-        )}
-      </TableBody>
-    </TableNext>
+        <TableHeader columns={columns}>
+          {(column) => (
+            <TableColumn key={column.key}>{column.label}</TableColumn>
+          )}
+        </TableHeader>
+        <TableBody
+          items={data || []}
+          isLoading={isLoading}
+          loadingContent={<Spinner label="Loading..." />}
+          emptyContent={
+            <div className="flex justify-center items-center flex-col">
+              <BsDatabaseAdd size={32} />
+              <h1>No Data</h1>
+            </div>
+          }
+        >
+          {(item) => (
+            <TableRow key={item.id}>
+              {(columnKey) => (
+                <TableCell className="text-slate-700">
+                  {renderCell(item, columnKey)}
+                </TableCell>
+              )}
+            </TableRow>
+          )}
+        </TableBody>
+      </TableNext>
+
+      {isPagination && (
+        <Pagination
+          total={Math.ceil(total / 20)}
+          size={"sm"}
+          onChange={handleChangePage}
+          page={currentPage}
+          classNames={{
+            wrapper: "mt-4",
+          }}
+        />
+      )}
+    </>
   );
 };
 

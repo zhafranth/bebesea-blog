@@ -18,6 +18,7 @@ export const actionGetUsers = async () => {
     return {
       data: users,
       status: 200,
+      total: 0,
       message: "success get users",
     };
   } catch (error) {
@@ -55,8 +56,10 @@ export const actionCreatePost = async (data: PostPayload) => {
   }
 };
 
-export const actionGetPosts = async () => {
+export const actionGetPosts = async (params?: { page: number }) => {
   try {
+    const { page = 1 } = params ?? {};
+    const limit = 20;
     const posts = await prisma.post.findMany({
       include: {
         author: {
@@ -67,9 +70,17 @@ export const actionGetPosts = async () => {
           },
         },
       },
+      take: +limit,
+      skip: +limit * (+page - 1),
+      orderBy: {
+        createdAt: "desc",
+      },
     });
+
+    const total = await prisma.post.count();
     return {
       data: posts,
+      total: total || 0,
       status: 200,
     };
   } catch (error) {

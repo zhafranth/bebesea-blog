@@ -6,9 +6,14 @@ import { useParams } from "next/navigation";
 import { ENUMS } from "./controller.enum";
 import { useGetTableList } from "../actions/hooks";
 
-const ControllerList = () => {
+const ControllerList = ({
+  searchParams,
+}: {
+  searchParams: { page: number };
+}) => {
   const { entity } = useParams<{ entity: string }>();
-  const { data } = useGetTableList(entity);
+  const { data, isLoading } = useGetTableList(entity, searchParams);
+  const { data: list = [], total = 0 } = data ?? {};
 
   const { columns, label, extendButton } =
     useMemo(() => {
@@ -21,7 +26,13 @@ const ControllerList = () => {
         <p className="capitalize text-3xl font-bold text-slate-800">{label}</p>
         {extendButton}
       </div>
-      <Table columns={columns || []} isLoading={false} data={data} />
+      <Table
+        columns={columns || []}
+        isLoading={isLoading}
+        data={list}
+        isPagination={entity === "post"}
+        total={total}
+      />
     </div>
   );
 };

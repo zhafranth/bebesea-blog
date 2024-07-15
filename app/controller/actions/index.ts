@@ -56,11 +56,21 @@ export const actionCreatePost = async (data: PostPayload) => {
   }
 };
 
-export const actionGetPosts = async (params?: { page: number }) => {
+export const actionGetPosts = async (params?: {
+  page: number;
+  search: string;
+  status: string;
+}) => {
   try {
-    const { page = 1 } = params ?? {};
+    const { page = 1, search, status } = params ?? {};
     const limit = 20;
     const posts = await prisma.post.findMany({
+      where: {
+        title: {
+          contains: search as string,
+        },
+        status,
+      },
       include: {
         author: {
           select: {

@@ -52,14 +52,21 @@ export const usePost = () => {
   return { mutateCreatePost, pendingCreate, mutateDeletePost, pendingDelete };
 };
 
-export const useGetPosts = (params?: { page: number }) => {
+export const useGetPosts = (params?: {
+  page: number;
+  search: string;
+  status: string;
+}) => {
   return useQuery({
     queryKey: ["posts"],
     queryFn: () => getPosts(params),
   });
 };
 
-export const useGetTableList = (entity: string, params?: { page: number }) => {
+export const useGetTableList = (
+  entity: string,
+  params?: { page: number; search: string; status: string }
+) => {
   return useQuery({
     queryKey: ["table-list", entity, params],
     queryFn: () => {

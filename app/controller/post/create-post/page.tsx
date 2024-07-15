@@ -22,7 +22,9 @@ import { useRouter } from "next/navigation";
 import Upload from "@/components/molecules/Upload";
 
 const CreatePost = () => {
-  const { data: users = [] } = useGetUsers();
+  const { data } = useGetUsers();
+  const { data: users = [] } = data ?? {};
+
   const { mutateCreatePost, pendingCreate } = usePost();
 
   const router = useRouter();

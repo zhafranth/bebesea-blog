@@ -7,12 +7,20 @@ import ActionPost from "./components/post/ActionPost";
 import TagRole from "./components/TagRole";
 import ButtonAddUser from "./components/users/ButtonAddUser";
 import ActionUser from "./components/users/ActionUser";
+import FilterStatus from "./components/post/FilterStatus";
+import SearchPost from "./components/post/SearchPost";
 
 export const ENUMS = [
   {
     key: "post",
     label: "Post",
     extendButton: <ButtonAddPost />,
+    topComponents: (
+      <div className="flex gap-x-2 items-center">
+        <SearchPost />
+        <FilterStatus />
+      </div>
+    ),
     columns: [
       {
         key: "title",

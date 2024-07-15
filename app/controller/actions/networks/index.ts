@@ -21,7 +21,11 @@ export const createUser = async (data: UserPayload) => {
   return response;
 };
 
-export const getPosts = async (params?: { page: number }) => {
+export const getPosts = async (params?: {
+  page: number;
+  search: string;
+  status: string;
+}) => {
   const response: { data: any; status: number; total: number } =
     await actionGetPosts(params);
   return response;

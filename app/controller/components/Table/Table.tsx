@@ -78,10 +78,9 @@ const Table = ({
     <>
       <TableNext
         aria-label="Example table with dynamic content"
-        className="mt-8"
         isStriped
         classNames={{
-          wrapper: "min-h-[75vh]",
+          wrapper: "min-h-[70vh]",
         }}
       >
         <TableHeader columns={columns}>

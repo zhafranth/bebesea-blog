@@ -16,11 +16,12 @@ const Editor = ({
   const config = useMemo(() => {
     return {
       readonly: false, // all options from https://xdsoft.net/jodit/docs/,
-      placeholder: "Start typings...",
+      placeholder: "",
       buttons:
         "bold,italic,underline,strikethrough,eraser,ul,ol,fontsize,paragraph,lineHeight,classSpan,image,copy,paste,selectall,copyformat,hr,link,symbols",
     };
   }, []);
+
   return (
     <div>
       <JoditEditor

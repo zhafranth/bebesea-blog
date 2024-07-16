@@ -3,8 +3,10 @@ import {
   createPost,
   createUser,
   delPost,
+  getPost,
   getPosts,
   getUsers,
+  updatePost,
 } from "../networks";
 import { PostPayload, UserPayload } from "../interface";
 
@@ -42,6 +44,11 @@ export const usePost = () => {
     mutationFn: (data: PostPayload) => createPost(data),
   });
 
+  const { mutate: mutateUpdatePost, isPending: pendingUpdate } = useMutation({
+    mutationFn: ({ data, id }: { data: PostPayload; id: string }) =>
+      updatePost(data, id),
+  });
+
   const { mutate: mutateDeletePost, isPending: pendingDelete } = useMutation({
     mutationFn: (id: string) => delPost(id),
     onSuccess: () => {
@@ -49,7 +56,14 @@ export const usePost = () => {
     },
   });
 
-  return { mutateCreatePost, pendingCreate, mutateDeletePost, pendingDelete };
+  return {
+    mutateCreatePost,
+    pendingCreate,
+    mutateDeletePost,
+    pendingDelete,
+    mutateUpdatePost,
+    pendingUpdate,
+  };
 };
 
 export const useGetPosts = (params?: {
@@ -58,8 +72,16 @@ export const useGetPosts = (params?: {
   status: string;
 }) => {
   return useQuery({
-    queryKey: ["posts"],
+    queryKey: ["posts", params],
     queryFn: () => getPosts(params),
+  });
+};
+
+export const useGetPost = (id: string) => {
+  return useQuery({
+    queryKey: ["post", id],
+    queryFn: () => getPost(id),
+    enabled: !!id,
   });
 };
 

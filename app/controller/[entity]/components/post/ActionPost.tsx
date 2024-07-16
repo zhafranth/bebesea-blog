@@ -4,6 +4,7 @@ import { usePost } from "@/app/controller/actions/hooks";
 import ModalConfirmation from "@/components/molecules/ModalConfirmation";
 import { Button } from "@nextui-org/react";
 import type { Post } from "@prisma/client";
+import { useRouter } from "next/navigation";
 import React, { useCallback, useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import { MdEditDocument } from "react-icons/md";
@@ -11,6 +12,8 @@ import { MdEditDocument } from "react-icons/md";
 const ActionPost = ({ data }: { data: Post }) => {
   const { mutateDeletePost, pendingDelete } = usePost();
   const [isShow, setIsShow] = useState(false);
+
+  const router = useRouter();
 
   const { id } = data ?? {};
 
@@ -36,7 +39,13 @@ const ActionPost = ({ data }: { data: Post }) => {
         >
           <FaTrash />
         </Button>
-        <Button size="sm" isIconOnly radius="full" color="primary">
+        <Button
+          size="sm"
+          isIconOnly
+          radius="full"
+          color="primary"
+          onPress={() => router.push(`/controller/post/${id}`)}
+        >
           <MdEditDocument size={16} />
         </Button>
       </div>

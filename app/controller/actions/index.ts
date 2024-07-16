@@ -114,3 +114,36 @@ export const actionRemovePost = async (id: string) => {
     throw new Error("Failed to fetch posts data");
   }
 };
+
+export const actionGetPost = async (id: string) => {
+  try {
+    const post = await prisma.post.findUnique({
+      where: {
+        id,
+      },
+    });
+    return {
+      data: post,
+      status: 200,
+    };
+  } catch (error) {
+    throw new Error("Failed to fetch post data");
+  }
+};
+
+export const actionUpdatePost = async (data: PostPayload, id: string) => {
+  try {
+    await prisma.post.update({
+      where: {
+        id,
+      },
+      data,
+    });
+    return {
+      status: 200,
+      message: "Success edit post",
+    };
+  } catch (error) {
+    throw new Error("Failed to fetch posts data");
+  }
+};

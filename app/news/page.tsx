@@ -1,11 +1,15 @@
+"use client";
+
 import CardList from "@/components/organism/CardList";
 import React from "react";
+import { useGetPostsList } from "../actions/hooks";
 
 const News = () => {
-  const data = [1, 2, 3, 4, 5, 6];
+  const { data } = useGetPostsList({ limit: 3, category: "news" });
+  const { data: posts = [], total = 0 } = data ?? {};
   return (
     <main className="container">
-      <CardList data={data} label="News" />
+      <CardList data={posts} total={total} label="News" />
     </main>
   );
 };

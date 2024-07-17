@@ -45,7 +45,7 @@ export const delPost = async (id: string) => {
   return response?.message;
 };
 
-export const getPost = async (id: string) => {
+export const getPost = async (id?: string) => {
   const response: { data: Post | null; status: number } = await actionGetPost(
     id
   );

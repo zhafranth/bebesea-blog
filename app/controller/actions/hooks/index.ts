@@ -77,7 +77,7 @@ export const useGetPosts = (params?: {
   });
 };
 
-export const useGetPost = (id: string) => {
+export const useGetPost = (id?: string) => {
   return useQuery({
     queryKey: ["post", id],
     queryFn: () => getPost(id),

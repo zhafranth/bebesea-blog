@@ -52,6 +52,7 @@ export const actionCreatePost = async (data: PostPayload) => {
       message: "Success create post",
     };
   } catch (error) {
+    console.log("error:", error);
     throw new Error("Failed to fetch posts data");
   }
 };
@@ -115,11 +116,20 @@ export const actionRemovePost = async (id: string) => {
   }
 };
 
-export const actionGetPost = async (id: string) => {
+export const actionGetPost = async (id?: string) => {
   try {
     const post = await prisma.post.findUnique({
       where: {
         id,
+      },
+      include: {
+        author: {
+          select: {
+            name: true,
+            role: true,
+            username: true,
+          },
+        },
       },
     });
     return {

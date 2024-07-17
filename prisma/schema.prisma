@@ -40,7 +40,7 @@ model Post {
   createdAt   DateTime   @default(now())
   status      String
   is_comment  Boolean
-  content     String
+  content     String     @db.LongText
   updatedAt   DateTime   @updatedAt
   comments    Comment[]
   cover       String?

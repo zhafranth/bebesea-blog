@@ -10,6 +10,7 @@ import {
   TableHeader,
   Table as TableNext,
   TableRow,
+  TableColumnProps,
 } from "@nextui-org/react";
 import { BsDatabaseAdd } from "react-icons/bs";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -31,7 +32,7 @@ const Table = ({
   columns: {
     key: string;
     label: string;
-    width?: string;
+    width?: number;
     render?: (data?: any) => React.ReactNode | React.JSX.Element;
   }[];
   isPagination?: boolean;
@@ -85,7 +86,9 @@ const Table = ({
       >
         <TableHeader columns={columns}>
           {(column) => (
-            <TableColumn key={column.key}>{column.label}</TableColumn>
+            <TableColumn width={column.width} key={column.key}>
+              {column.label}
+            </TableColumn>
           )}
         </TableHeader>
         <TableBody

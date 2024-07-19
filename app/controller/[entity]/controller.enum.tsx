@@ -9,6 +9,7 @@ import ButtonAddUser from "./components/users/ButtonAddUser";
 import ActionUser from "./components/users/ActionUser";
 import FilterStatus from "./components/post/FilterStatus";
 import SearchPost from "./components/post/SearchPost";
+import TitlePost from "./components/post/TitlePost";
 
 export const ENUMS = [
   {
@@ -25,6 +26,8 @@ export const ENUMS = [
       {
         key: "title",
         label: "Title",
+        width: 300,
+        render: ({ title }: Post) => <TitlePost title={title} />,
       },
       {
         key: "category",

@@ -6,15 +6,10 @@ import { stat, mkdir, writeFile, rm } from "fs/promises";
 
 export const uploadCover = async (formData: FormData) => {
   const file = (formData.get("file") as File) || "";
+  const path = (formData.get("path") as string) || "";
 
   const buffer = Buffer.from(await file.arrayBuffer());
-  const relativeUploadDir = `/uploads/${new Date(Date.now())
-    .toLocaleDateString("id-ID", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    })
-    .replace(/\//g, "-")}`;
+  const relativeUploadDir = `/uploads/${path}`;
 
   const uploadDir = join(process.cwd(), "public", relativeUploadDir);
 
@@ -35,10 +30,7 @@ export const uploadCover = async (formData: FormData) => {
 
   try {
     const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-    const filename = `${file.name.replace(
-      /\.[^/.]+$/,
-      ""
-    )}-${uniqueSuffix}.${mime.getExtension(file.type)}`;
+    const filename = `${uniqueSuffix}.${mime.getExtension(file.type)}`;
     await writeFile(`${uploadDir}/${filename}`, buffer);
     const fileUrl = `${relativeUploadDir}/${filename}`;
 

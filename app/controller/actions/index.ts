@@ -53,7 +53,7 @@ export const actionCreatePost = async (data: PostPayload) => {
     };
   } catch (error) {
     console.log("error:", error);
-    throw new Error("Failed to fetch posts data");
+    throw new Error("Failed to create post");
   }
 };
 
@@ -137,7 +137,7 @@ export const actionGetPost = async (id?: string) => {
       status: 200,
     };
   } catch (error) {
-    throw new Error("Failed to fetch post data");
+    throw new Error("Failed to delete post");
   }
 };
 
@@ -154,6 +154,6 @@ export const actionUpdatePost = async (data: PostPayload, id: string) => {
       message: "Success edit post",
     };
   } catch (error) {
-    throw new Error("Failed to fetch posts data");
+    throw new Error("Failed to edit posts");
   }
 };

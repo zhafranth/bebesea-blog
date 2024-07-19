@@ -3,6 +3,7 @@ import React, { useCallback, useRef, useState } from "react";
 import { BsUpload } from "react-icons/bs";
 import { useUpload } from "./hooks";
 import { FaX } from "react-icons/fa6";
+import { toast } from "react-toastify";
 
 const Upload = ({
   onChange,
@@ -30,15 +31,20 @@ const Upload = ({
 
   const handleImport = useCallback(
     async (event_: React.ChangeEvent<HTMLInputElement>) => {
-      const data = new FormData();
-      const rawFile = event_.target.files && event_.target.files[0];
-      data.set("file", rawFile as File);
+      const file = event_.target.files && event_.target.files[0];
+      if (file && file.size > 1 * 2000 * 1024) {
+        toast.error("Max file size 2MB");
+      } else {
+        const data = new FormData();
+        data.set("file", file as File);
+        data.set("path", "cover" as string);
 
-      mutateUpload(data, {
-        onSuccess(data) {
-          onChange(data?.data as unknown as string);
-        },
-      });
+        mutateUpload(data, {
+          onSuccess(data) {
+            onChange(data?.data as unknown as string);
+          },
+        });
+      }
     },
     [mutateUpload, onChange]
   );
@@ -76,7 +82,7 @@ const Upload = ({
       </Button>
       {!!value && (
         <>
-          <p>{value || ""}</p>
+          <p className="text-sm text-slate-600">{value || ""}</p>
           <Button
             isIconOnly
             variant="flat"

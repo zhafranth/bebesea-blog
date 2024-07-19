@@ -12,47 +12,12 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Post } from "@prisma/client";
 import dayjs from "dayjs";
-import htmlParser, {
-  domToReact,
-  HTMLReactParserOptions,
-  Element,
-  DOMNode,
-} from "html-react-parser";
+import htmlParser from "html-react-parser";
+import { options } from "./utils/contentFormatter";
 
 const Card = ({ data }: { data: Post }) => {
   const { title, category, cover, date, content, id } = data ?? {};
   const router = useRouter();
-
-  const hasImage = (node: Element) => {
-    const stack: Element[] = [node];
-
-    while (stack.length > 0) {
-      const { name, children } = stack.pop() ?? {};
-      if (name === "img" || name === "br") return true;
-      if (children) stack.push(...(children as any));
-    }
-
-    return false;
-  };
-
-  const options: HTMLReactParserOptions = {
-    replace: (domNode) => {
-      const node = domNode as Element;
-      if (node.attribs?.dir === "ltr") {
-        return <p>{domToReact(node.children as DOMNode[], options)}</p>;
-      }
-      if ((domNode as Element).name === "span") {
-        return (
-          <span>
-            {domToReact((domNode as Element).children as DOMNode[], options)}
-          </span>
-        );
-      }
-      if (hasImage(domNode as Element)) {
-        return <></>;
-      }
-    },
-  };
 
   return (
     <CardUI

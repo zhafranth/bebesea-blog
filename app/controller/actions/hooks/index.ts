@@ -9,6 +9,7 @@ import {
   updatePost,
 } from "../networks";
 import { PostPayload, UserPayload } from "../interface";
+import { toast } from "react-toastify";
 
 export const useGetUsers = () => {
   return useQuery({
@@ -42,17 +43,32 @@ export const usePost = () => {
 
   const { mutate: mutateCreatePost, isPending: pendingCreate } = useMutation({
     mutationFn: (data: PostPayload) => createPost(data),
+    onSuccess: ({ message }) => {
+      toast.success(message);
+    },
+    onError: ({ message }) => {
+      toast.error(message);
+    },
   });
 
   const { mutate: mutateUpdatePost, isPending: pendingUpdate } = useMutation({
     mutationFn: ({ data, id }: { data: PostPayload; id: string }) =>
       updatePost(data, id),
+    onSuccess: ({ message }) => {
+      toast.success(message);
+    },
+    onError: ({ message }) => {
+      toast.error(message);
+    },
   });
 
   const { mutate: mutateDeletePost, isPending: pendingDelete } = useMutation({
     mutationFn: (id: string) => delPost(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["table-list"] });
+    },
+    onError: ({ message }) => {
+      toast.error(message);
     },
   });
 

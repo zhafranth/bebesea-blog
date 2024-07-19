@@ -20,6 +20,7 @@ import { useGetUsers, usePost } from "../../actions/hooks";
 import { PostPayload } from "../../actions/interface";
 import { useRouter } from "next/navigation";
 import Upload from "@/components/molecules/Upload";
+import { toast } from "react-toastify";
 
 const CreatePost = () => {
   const { data } = useGetUsers();
@@ -269,11 +270,16 @@ const CreatePost = () => {
                 return (
                   <div className="w-[40%]">
                     <p className="font-bold text-sm mb-3">Allow Comments</p>
-                    <Switch
-                      name="is_comment"
-                      isSelected={field.state.value as boolean}
-                      onValueChange={(value) => field.handleChange(value)}
-                    />
+                    <div className="flex items-center">
+                      <Switch
+                        name="is_comment"
+                        isSelected={field.state.value as boolean}
+                        onValueChange={(value) => field.handleChange(value)}
+                      />
+                      <p className="text-sm">
+                        {field.state.value ? "Show" : "Hide"}
+                      </p>
+                    </div>
                   </div>
                 );
               }}

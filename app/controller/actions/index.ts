@@ -1,7 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { PostPayload, UserPayload } from "./interface";
+import { CommentPayload, PostPayload, UserPayload } from "./interface";
 
 // USERS ACTION ================================
 
@@ -80,6 +80,7 @@ export const actionGetPosts = async (params?: {
             username: true,
           },
         },
+        comments: true,
       },
       take: +limit,
       skip: +limit * (+page - 1),
@@ -130,6 +131,7 @@ export const actionGetPost = async (id?: string) => {
             username: true,
           },
         },
+        comments: true,
       },
     });
     return {
@@ -155,5 +157,38 @@ export const actionUpdatePost = async (data: PostPayload, id: string) => {
     };
   } catch (error) {
     throw new Error("Failed to edit posts");
+  }
+};
+
+//  COMMENTS ACTIONS ===========================
+export const actionCreateComment = async (data: CommentPayload) => {
+  try {
+    await prisma.comment.create({
+      data,
+    });
+    return {
+      status: 200,
+      message: "Success create comment",
+    };
+  } catch (error) {
+    console.log("error:", error);
+    throw new Error("Failed to create comment");
+  }
+};
+
+export const actionRemoveComment = async (id: string) => {
+  try {
+    await prisma.comment.delete({
+      where: {
+        id,
+      },
+    });
+
+    return {
+      status: 200,
+      message: "Success remove comment",
+    };
+  } catch (error) {
+    throw new Error("Failed to fetch comments data");
   }
 };

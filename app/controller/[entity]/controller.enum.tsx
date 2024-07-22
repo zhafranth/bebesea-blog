@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import TagComment from "./components/TagComment";
 import TagStatus from "./components/TagStatus";
 import ButtonAddPost from "./components/post/ButtonAddPost";
-import type { User, Post } from "@prisma/client";
+import type { User, Post, Comment } from "@prisma/client";
 import ActionPost from "./components/post/ActionPost";
 import TagRole from "./components/TagRole";
 import ButtonAddUser from "./components/users/ButtonAddUser";
@@ -51,7 +51,9 @@ export const ENUMS = [
       {
         key: "is_comment",
         label: "Comment",
-        render: ({ is_comment }: Post) => <TagComment value={is_comment} />,
+        render: ({ is_comment, comments }: Post & { comments: Comment[] }) => (
+          <TagComment value={is_comment} comments={comments} />
+        ),
       },
       {
         key: "created_at",

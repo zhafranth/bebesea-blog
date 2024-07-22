@@ -7,15 +7,18 @@ import { useParams, useRouter } from "next/navigation";
 import React from "react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { MdKeyboardArrowLeft } from "react-icons/md";
+import { MdKeyboardArrowLeft, MdOutlineComment } from "react-icons/md";
 import htmlParser from "html-react-parser";
 import dayjs from "dayjs";
-import { Post, User } from "@prisma/client";
+import { Post, User, Comment } from "@prisma/client";
+import useToggle from "@/utils/hooks/useToggle";
+import ModalComment from "./ModalComment";
 
 const DetailBlog = () => {
   const router = useRouter();
   const { id } = useParams();
   const { data: detail } = useGetPost(id as string);
+  const { isOpen, toggle } = useToggle();
 
   const {
     title,
@@ -24,7 +27,9 @@ const DetailBlog = () => {
     date,
     author,
     tags,
-  } = (detail as Post & { author: User }) ?? {};
+    comments = [],
+  } = (detail as Post & { author: User; comments: Comment[] }) ?? {};
+
   const { name } = author ?? {};
 
   return (
@@ -171,24 +176,34 @@ const DetailBlog = () => {
         ))}
       </div>
 
+      {/* Comments */}
       <div className="my-10">
-        <div>
-          <div className="flex gap-12">
-            <div className="w-12 h-12  rounded-full flex justify-center items-center text-white bg-purple-500">
-              <p>A</p>
-            </div>
-            <div className="flex-1">
-              <p className="font-semibold text-lg">Ahmad</p>
-              <p className="text-sm text-slate-500">20 Juni 2021</p>
-              <p className="mt-4 text-slate-600">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni
-                animi consequatur alias, iure blanditiis dolores quisquam
-                voluptatum quasi nesciunt numquam esse repellendus sunt,
-                reiciendis obcaecati.
-              </p>
+        <Button
+          startContent={<MdOutlineComment />}
+          variant="light"
+          color="warning"
+          className="mb-12"
+          onPress={toggle}
+        >
+          Write Comments
+        </Button>
+        {isOpen && <ModalComment toggle={toggle} />}
+        {comments?.map((item, index) => (
+          <div key={`comment-${index}`} className="mb-8">
+            <div className="flex gap-12">
+              <div className="w-12 h-12  rounded-full flex justify-center items-center text-white bg-purple-500">
+                <p>{item.name.charAt(0).toUpperCase()}</p>
+              </div>
+              <div className="flex-1">
+                <p className="font-semibold text-lg">{item.name}</p>
+                <p className="text-sm text-slate-500">
+                  {dayjs(item.createdAt).format("DD MMM YYYY")}
+                </p>
+                <p className="mt-4 text-slate-600">{item.comment}</p>
+              </div>
             </div>
           </div>
-        </div>
+        ))}
       </div>
     </main>
   );

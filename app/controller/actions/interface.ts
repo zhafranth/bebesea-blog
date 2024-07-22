@@ -18,6 +18,13 @@ export interface UserPayload {
   role: Role;
 }
 
+export interface CommentPayload {
+  name: string;
+  email: string;
+  comment: string;
+  postId: string;
+}
+
 export type ColorType =
   | "default"
   | "primary"

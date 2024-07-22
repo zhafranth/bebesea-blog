@@ -6,8 +6,10 @@ import {
   actionRemovePost,
   actionGetPost,
   actionUpdatePost,
+  actionCreateComment,
+  actionRemoveComment,
 } from "..";
-import { PostPayload, UserPayload } from "../interface";
+import { CommentPayload, PostPayload, UserPayload } from "../interface";
 import type { Post } from "@prisma/client";
 
 export const getUsers = async () => {
@@ -50,4 +52,14 @@ export const getPost = async (id?: string) => {
     id
   );
   return response.data;
+};
+
+export const createComment = async (data: CommentPayload) => {
+  const response = await actionCreateComment(data);
+  return response;
+};
+
+export const delComment = async (id: string) => {
+  const response = await actionRemoveComment(id);
+  return response?.message;
 };

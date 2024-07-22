@@ -1,14 +1,16 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
+  createComment,
   createPost,
   createUser,
+  delComment,
   delPost,
   getPost,
   getPosts,
   getUsers,
   updatePost,
 } from "../networks";
-import { PostPayload, UserPayload } from "../interface";
+import { CommentPayload, PostPayload, UserPayload } from "../interface";
 import { toast } from "react-toastify";
 
 export const useGetUsers = () => {
@@ -118,4 +120,27 @@ export const useGetTableList = (
     },
     enabled: !(entity === "videos"),
   });
+};
+
+export const useComment = () => {
+  const queryClient = useQueryClient();
+  const { mutate: mutateCreateComment, isPending: pendingCreateComment } =
+    useMutation({
+      mutationFn: (data: CommentPayload) => createComment(data),
+    });
+
+  const { mutate: mutateDeleteComment, isPending: pendingDeleteComment } =
+    useMutation({
+      mutationFn: (id: string) => delComment(id),
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["table-list"] });
+      },
+    });
+
+  return {
+    mutateCreateComment,
+    pendingCreateComment,
+    mutateDeleteComment,
+    pendingDeleteComment,
+  };
 };

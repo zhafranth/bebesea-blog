@@ -63,3 +63,10 @@ model Video {
   createdAt DateTime @default(now())
 
 }
+
+model Podcast  {
+  id Int @id @default(autoincrement())
+  title     String  @db.Text
+  url       String
+  createdAt DateTime @default(now())
+}

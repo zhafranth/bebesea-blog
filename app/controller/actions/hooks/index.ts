@@ -7,6 +7,7 @@ import {
   delComment,
   delPost,
   delVideo,
+  getPodcast,
   getPost,
   getPosts,
   getUsers,
@@ -16,11 +17,13 @@ import {
 } from "../networks";
 import {
   CommentPayload,
+  PodcastPayload,
   PostPayload,
   UserPayload,
   VideoPayload,
 } from "../interface";
 import { toast } from "react-toastify";
+import { actionUpdatePodcast } from "..";
 
 export const useGetUsers = () => {
   return useQuery({
@@ -197,4 +200,22 @@ export const useVideo = () => {
     mutateDeleteVideo,
     pendingDeleteVideo,
   };
+};
+
+export const useGetPodcast = () => {
+  return useQuery({
+    queryKey: ["podcast"],
+    queryFn: () => getPodcast(),
+  });
+};
+
+export const usePodcast = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (data: PodcastPayload) => actionUpdatePodcast(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["podcast"] });
+    },
+  });
 };

@@ -29,6 +29,10 @@ export interface VideoPayload {
   title: string;
   url: string;
 }
+export interface PodcastPayload {
+  title: string;
+  url: string;
+}
 
 export type ColorType =
   | "default"

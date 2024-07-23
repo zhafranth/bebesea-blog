@@ -1,3 +1,6 @@
+"use client";
+
+import { useGetPodcast } from "@/app/controller/actions/hooks";
 import TitleSection from "@/components/molecules/TitleSection";
 import { Button } from "@nextui-org/react";
 import Image from "next/image";
@@ -5,6 +8,8 @@ import React from "react";
 import { FaPlay } from "react-icons/fa";
 
 const Podcast = () => {
+  const { data } = useGetPodcast();
+
   return (
     <main className="container">
       <TitleSection label="Podcast" />
@@ -39,7 +44,7 @@ const Podcast = () => {
           style={{
             borderRadius: "12px",
           }}
-          src="https://open.spotify.com/embed/episode/04RpViTHRdEbylRxmdM3yi?utm_source=generator"
+          src={data?.url}
           width="100%"
           height="352"
           frameBorder="0"

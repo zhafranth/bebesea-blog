@@ -12,14 +12,17 @@ import {
   actionRemoveVideo,
   actionGetVideo,
   actionUpdateVideo,
+  actionGetPodcast,
+  actionUpdatePodcast,
 } from "..";
 import {
   CommentPayload,
+  PodcastPayload,
   PostPayload,
   UserPayload,
   VideoPayload,
 } from "../interface";
-import type { Post, Video } from "@prisma/client";
+import type { Podcast, Post, Video } from "@prisma/client";
 
 export const getUsers = async () => {
   const response = await actionGetUsers();
@@ -91,4 +94,15 @@ export const updateVideo = async (data: VideoPayload, id: string) => {
 export const delVideo = async (id: string) => {
   const response = await actionRemoveVideo(id);
   return response?.message;
+};
+
+export const getPodcast = async () => {
+  const response: { data: Podcast | null; status: number; message: string } =
+    await actionGetPodcast();
+  return response.data;
+};
+
+export const updatePodcast = async (data: PodcastPayload) => {
+  const response = await actionUpdatePodcast(data);
+  return response;
 };

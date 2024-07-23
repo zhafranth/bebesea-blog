@@ -3,6 +3,7 @@
 import { prisma } from "@/lib/prisma";
 import {
   CommentPayload,
+  PodcastPayload,
   PostPayload,
   UserPayload,
   VideoPayload,
@@ -198,7 +199,7 @@ export const actionRemoveComment = async (id: string) => {
   }
 };
 
-//  COMMENTS VIDEO ===========================
+//  VIDEO ===========================
 
 export const actionGetVideo = async (params?: {
   page?: number;
@@ -272,5 +273,43 @@ export const actionRemoveVideo = async (id: string) => {
     };
   } catch (error) {
     throw new Error("Failed to fetch videos data");
+  }
+};
+
+// PODCAST =========================
+
+export const actionGetPodcast = async () => {
+  try {
+    const podcast = await prisma.podcast.findUnique({
+      where: {
+        id: 1,
+      },
+    });
+
+    return {
+      data: podcast,
+      message: "Success get podcast",
+      status: 200,
+    };
+  } catch (error) {
+    throw new Error("Failed to fetch podcast data");
+  }
+};
+
+export const actionUpdatePodcast = async (data: PodcastPayload) => {
+  try {
+    await prisma.podcast.update({
+      where: {
+        id: 1,
+      },
+      data,
+    });
+    return {
+      status: 200,
+      message: "Success update podcast",
+    };
+  } catch (error) {
+    console.log("error:", error);
+    throw new Error("Failed to update podcast");
   }
 };

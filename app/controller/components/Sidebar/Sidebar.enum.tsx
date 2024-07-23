@@ -1,4 +1,5 @@
 import { FaUsers, FaYoutube } from "react-icons/fa";
+import { FaPodcast } from "react-icons/fa6";
 import { SiGitbook } from "react-icons/si";
 
 export const SIDEBAR_ENUM = [
@@ -16,5 +17,10 @@ export const SIDEBAR_ENUM = [
     path: "videos",
     label: "Youtube Videos",
     icon: <FaYoutube />,
+  },
+  {
+    path: "podcast",
+    label: "Podcast",
+    icon: <FaPodcast />,
   },
 ];

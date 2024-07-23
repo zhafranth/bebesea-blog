@@ -55,3 +55,11 @@ model Comment {
   postId    String
   post      Post     @relation(fields: [postId], references: [id])
 }
+
+model Video {
+  id        String  @id @default(cuid())
+  title     String  @db.LongText
+  url       String
+  createdAt DateTime @default(now())
+
+}

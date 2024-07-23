@@ -1,7 +1,12 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { CommentPayload, PostPayload, UserPayload } from "./interface";
+import {
+  CommentPayload,
+  PostPayload,
+  UserPayload,
+  VideoPayload,
+} from "./interface";
 
 // USERS ACTION ================================
 
@@ -58,9 +63,9 @@ export const actionCreatePost = async (data: PostPayload) => {
 };
 
 export const actionGetPosts = async (params?: {
-  page: number;
-  search: string;
-  status: string;
+  page?: number;
+  search?: string;
+  status?: string;
 }) => {
   try {
     const { page = 1, search, status } = params ?? {};
@@ -190,5 +195,82 @@ export const actionRemoveComment = async (id: string) => {
     };
   } catch (error) {
     throw new Error("Failed to fetch comments data");
+  }
+};
+
+//  COMMENTS VIDEO ===========================
+
+export const actionGetVideo = async (params?: {
+  page?: number;
+  limit?: number;
+}) => {
+  try {
+    const { page = 1, limit = 20 } = params ?? {};
+    const videos = await prisma.video.findMany({
+      take: +limit,
+      skip: +limit * (+page - 1),
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    const total = await prisma.video.count();
+    return {
+      data: videos,
+      total: total || 0,
+      status: 200,
+    };
+  } catch (error) {
+    throw new Error("Failed to fetch videos data");
+  }
+};
+
+export const actionCreateVideo = async (data: VideoPayload) => {
+  try {
+    await prisma.video.create({
+      data,
+    });
+    return {
+      status: 200,
+      message: "Success create video",
+    };
+  } catch (error) {
+    console.log("error:", error);
+    throw new Error("Failed to create video");
+  }
+};
+
+export const actionUpdateVideo = async (data: VideoPayload, id: string) => {
+  try {
+    await prisma.video.update({
+      where: {
+        id,
+      },
+      data,
+    });
+    return {
+      status: 200,
+      message: "Success update video",
+    };
+  } catch (error) {
+    console.log("error:", error);
+    throw new Error("Failed to update video");
+  }
+};
+
+export const actionRemoveVideo = async (id: string) => {
+  try {
+    await prisma.video.delete({
+      where: {
+        id,
+      },
+    });
+
+    return {
+      status: 200,
+      message: "Success remove video",
+    };
+  } catch (error) {
+    throw new Error("Failed to fetch videos data");
   }
 };

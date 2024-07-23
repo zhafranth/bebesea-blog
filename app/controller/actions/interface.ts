@@ -25,6 +25,11 @@ export interface CommentPayload {
   postId: string;
 }
 
+export interface VideoPayload {
+  title: string;
+  url: string;
+}
+
 export type ColorType =
   | "default"
   | "primary"

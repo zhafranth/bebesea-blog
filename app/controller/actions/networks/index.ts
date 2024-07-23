@@ -8,9 +8,18 @@ import {
   actionUpdatePost,
   actionCreateComment,
   actionRemoveComment,
+  actionCreateVideo,
+  actionRemoveVideo,
+  actionGetVideo,
+  actionUpdateVideo,
 } from "..";
-import { CommentPayload, PostPayload, UserPayload } from "../interface";
-import type { Post } from "@prisma/client";
+import {
+  CommentPayload,
+  PostPayload,
+  UserPayload,
+  VideoPayload,
+} from "../interface";
+import type { Post, Video } from "@prisma/client";
 
 export const getUsers = async () => {
   const response = await actionGetUsers();
@@ -33,9 +42,9 @@ export const createUser = async (data: UserPayload) => {
 };
 
 export const getPosts = async (params?: {
-  page: number;
-  search: string;
-  status: string;
+  page?: number;
+  search?: string;
+  status?: string;
 }) => {
   const response: { data: any; status: number; total: number } =
     await actionGetPosts(params);
@@ -61,5 +70,25 @@ export const createComment = async (data: CommentPayload) => {
 
 export const delComment = async (id: string) => {
   const response = await actionRemoveComment(id);
+  return response?.message;
+};
+
+export const getVideos = async (params?: { page?: number; limit?: number }) => {
+  const response: { data: Video[]; status: number; total: number } =
+    await actionGetVideo(params);
+  return response;
+};
+
+export const createVideo = async (data: VideoPayload) => {
+  const response = await actionCreateVideo(data);
+  return response;
+};
+export const updateVideo = async (data: VideoPayload, id: string) => {
+  const response = await actionUpdateVideo(data, id);
+  return response;
+};
+
+export const delVideo = async (id: string) => {
+  const response = await actionRemoveVideo(id);
   return response?.message;
 };

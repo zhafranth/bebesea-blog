@@ -3,14 +3,23 @@ import {
   createComment,
   createPost,
   createUser,
+  createVideo,
   delComment,
   delPost,
+  delVideo,
   getPost,
   getPosts,
   getUsers,
+  getVideos,
   updatePost,
+  updateVideo,
 } from "../networks";
-import { CommentPayload, PostPayload, UserPayload } from "../interface";
+import {
+  CommentPayload,
+  PostPayload,
+  UserPayload,
+  VideoPayload,
+} from "../interface";
 import { toast } from "react-toastify";
 
 export const useGetUsers = () => {
@@ -105,7 +114,7 @@ export const useGetPost = (id?: string) => {
 
 export const useGetTableList = (
   entity: string,
-  params?: { page: number; search: string; status: string }
+  params?: { page: number; search?: string; status?: string }
 ) => {
   return useQuery({
     queryKey: ["table-list", entity, params],
@@ -116,9 +125,10 @@ export const useGetTableList = (
       if (entity === "users") {
         return getUsers();
       }
-      // return [];
+      if (entity === "videos") {
+        return getVideos(params);
+      }
     },
-    enabled: !(entity === "videos"),
   });
 };
 
@@ -142,5 +152,49 @@ export const useComment = () => {
     pendingCreateComment,
     mutateDeleteComment,
     pendingDeleteComment,
+  };
+};
+
+export const useGetVideos = (params?: { page?: number; limit?: number }) => {
+  return useQuery({
+    queryKey: ["videos", params],
+    queryFn: () => getVideos(params),
+  });
+};
+
+export const useVideo = () => {
+  const queryClient = useQueryClient();
+  const { mutate: mutateCreateVideo, isPending: pendingCreateVideo } =
+    useMutation({
+      mutationFn: (data: VideoPayload) => createVideo(data),
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["table-list"] });
+      },
+    });
+
+  const { mutate: mutateUpdateVideo, isPending: pendingUpdateVideo } =
+    useMutation({
+      mutationFn: ({ data, id }: { data: VideoPayload; id: string }) =>
+        updateVideo(data, id),
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["table-list"] });
+      },
+    });
+
+  const { mutate: mutateDeleteVideo, isPending: pendingDeleteVideo } =
+    useMutation({
+      mutationFn: (id: string) => delVideo(id),
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["table-list"] });
+      },
+    });
+
+  return {
+    mutateCreateVideo,
+    pendingCreateVideo,
+    mutateUpdateVideo,
+    pendingUpdateVideo,
+    mutateDeleteVideo,
+    pendingDeleteVideo,
   };
 };

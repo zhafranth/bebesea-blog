@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import TagComment from "./components/TagComment";
 import TagStatus from "./components/TagStatus";
 import ButtonAddPost from "./components/post/ButtonAddPost";
-import type { User, Post, Comment } from "@prisma/client";
+import type { User, Post, Comment, Video } from "@prisma/client";
 import ActionPost from "./components/post/ActionPost";
 import TagRole from "./components/TagRole";
 import ButtonAddUser from "./components/users/ButtonAddUser";
@@ -10,6 +10,8 @@ import ActionUser from "./components/users/ActionUser";
 import FilterStatus from "./components/post/FilterStatus";
 import SearchPost from "./components/post/SearchPost";
 import TitlePost from "./components/post/TitlePost";
+import ButtonAddVideos from "./components/videos/ButtonAddVideos";
+import ActionVideos from "./components/videos/ActionVideos";
 
 export const ENUMS = [
   {
@@ -99,10 +101,12 @@ export const ENUMS = [
   {
     key: "videos",
     label: "Youtube Videos",
+    extendButton: <ButtonAddVideos />,
     columns: [
       {
         key: "title",
         label: "Title",
+        width: 350,
       },
       {
         key: "url",
@@ -111,6 +115,7 @@ export const ENUMS = [
       {
         key: "action",
         label: "Action",
+        render: (data: Video) => <ActionVideos data={data} />,
       },
     ],
   },

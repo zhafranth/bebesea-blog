@@ -3,8 +3,8 @@
 import { useGetPost } from "@/app/controller/actions/hooks";
 import { Avatar, AvatarIcon, Button, Chip } from "@nextui-org/react";
 import Image from "next/image";
-import { useParams, useRouter } from "next/navigation";
-import React from "react";
+import { useParams, usePathname, useRouter } from "next/navigation";
+import React, { useMemo } from "react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { MdKeyboardArrowLeft, MdOutlineComment } from "react-icons/md";
@@ -17,8 +17,14 @@ import ModalComment from "./ModalComment";
 const DetailBlog = () => {
   const router = useRouter();
   const { id } = useParams();
+  const pathname = usePathname();
   const { data: detail } = useGetPost(id as string);
   const { isOpen, toggle } = useToggle();
+
+  const isPreviewPage = useMemo(
+    () => pathname.includes("/preview"),
+    [pathname]
+  );
 
   const {
     title,
@@ -184,6 +190,7 @@ const DetailBlog = () => {
           color="warning"
           className="mb-12"
           onPress={toggle}
+          isDisabled={isPreviewPage}
         >
           Write Comments
         </Button>

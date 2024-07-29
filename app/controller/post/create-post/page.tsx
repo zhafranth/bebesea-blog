@@ -11,7 +11,7 @@ import {
   SelectItem,
   Switch,
 } from "@nextui-org/react";
-import { CATEGORY_OPTIONS, STATUS_OPTIONS } from "./enums";
+import { CATEGORY_OPTIONS } from "./enums";
 import { useForm } from "@tanstack/react-form";
 import Header from "../../components/Header/Header";
 import dayjs from "dayjs";
@@ -21,10 +21,13 @@ import { PostPayload } from "../../actions/interface";
 import { useRouter } from "next/navigation";
 import Upload from "@/components/molecules/Upload";
 import { toast } from "react-toastify";
+import { useStatusOptions } from "../hooks/useStatusOptions";
 
 const CreatePost = () => {
   const { data } = useGetUsers();
   const { data: users = [] } = data ?? {};
+
+  const STATUS_OPTIONS = useStatusOptions();
 
   const { mutateCreatePost, pendingCreate } = usePost();
 

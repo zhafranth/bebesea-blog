@@ -8,6 +8,8 @@ import {
   UserPayload,
   VideoPayload,
 } from "./interface";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 // USERS ACTION ================================
 
@@ -310,6 +312,30 @@ export const actionUpdatePodcast = async (data: PodcastPayload) => {
     };
   } catch (error) {
     console.log("error:", error);
+    throw new Error("Failed to update podcast");
+  }
+};
+
+export const actionGetProfile = async () => {
+  try {
+    const session = await getServerSession(authOptions);
+
+    if (!session?.user?.username) {
+      throw new Error("Invalid credentials");
+    }
+
+    const user = await prisma?.user.findUnique({
+      where: {
+        username: session.user.username,
+      },
+    });
+
+    if (!user) {
+      throw new Error("Invalid credentials");
+    }
+
+    return { user };
+  } catch (error) {
     throw new Error("Failed to update podcast");
   }
 };

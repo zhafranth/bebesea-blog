@@ -15,8 +15,7 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.password || !credentials?.password) {
-          console.log("invalid credentials");
-          throw new Error("Invalid Credentials");
+          throw new Error("Invalid Username");
         }
         const user = await prisma.user.findUnique({
           where: {
@@ -25,13 +24,11 @@ export const authOptions: NextAuthOptions = {
         });
 
         if (!user || !user?.password) {
-          console.log("no users or password");
-          throw new Error("Invalid Credentials");
+          throw new Error("Invalid Username");
         }
 
         if (user.password !== credentials.password) {
-          console.log("invalid password");
-          throw new Error("Invalid credentials");
+          throw new Error("Invalid Password");
         }
 
         return user;

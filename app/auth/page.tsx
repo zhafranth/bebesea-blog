@@ -1,34 +1,38 @@
 "use client";
 
 import { Button, Input, Link } from "@nextui-org/react";
+import { useForm } from "@tanstack/react-form";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
-import React, { useCallback, useState } from "react";
+import { useRouter } from "next/navigation";
+import React from "react";
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 
 const Auth = () => {
-  const [payload, setPayload] = useState({
-    username: null,
-    password: null,
-  });
+  const router = useRouter();
 
-  const handleLogin = useCallback(
-    async (payload: { username: string; password: string }) =>
-      await signIn("credentials", {
-        ...payload,
-        redirect: true,
-        callbackUrl: "/controller",
-      }),
-    []
-  );
-
-  const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>, key: string) => {
-      setPayload((prevState) => ({ ...prevState, [key]: event.target.value }));
+  const form = useForm<{ username: string; password: string }>({
+    onSubmit: async ({ value }) => {
+      const response = await signIn("credentials", {
+        ...value,
+        redirect: false,
+      });
+      if (response?.error) {
+        const key = response?.error.includes("Username")
+          ? "username"
+          : "password";
+        form.setFieldMeta(key, (prevMeta) => ({
+          ...prevMeta,
+          errorMap: {
+            onSubmit: response?.error,
+          },
+        }));
+      } else {
+        router.push("/controller/post");
+      }
     },
-    []
-  );
+  });
 
   return (
     <main id="auth">
@@ -53,30 +57,71 @@ const Auth = () => {
             </p>
           </div>
           <div className="flex flex-col gap-y-10 my-24 sm:w-2/3 w-5/6 mx-auto">
-            <Input
-              label="Username"
-              labelPlacement="outside"
-              type="text"
-              placeholder="Username"
-              endContent={<FaUser />}
-              onChange={(event) => handleChange(event, "username")}
-            />
-            <Input
-              label="Password"
-              labelPlacement="outside"
-              type="password"
-              placeholder="Password"
-              endContent={<RiLockPasswordFill />}
-              onChange={(event) => handleChange(event, "password")}
-            />
-            <Button
-              color="warning"
-              radius="full"
-              className="text-white w-full mt-14"
-              onPress={() => handleLogin(payload)}
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                form.handleSubmit();
+              }}
             >
-              Login
-            </Button>
+              <form.Field
+                name="username"
+                validators={{
+                  onChange: ({ value }) =>
+                    !value ? "This field is required" : undefined,
+                }}
+              >
+                {(field) => {
+                  return (
+                    <Input
+                      name={field.name}
+                      value={field.state.value as string}
+                      label="Username"
+                      placeholder="Input Username"
+                      labelPlacement="outside"
+                      radius="sm"
+                      isInvalid={field.state.meta.errors.length > 0}
+                      errorMessage={field.state.meta.errors[0]}
+                      endContent={<FaUser />}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                    />
+                  );
+                }}
+              </form.Field>
+              <form.Field
+                name="password"
+                validators={{
+                  onChange: ({ value }) =>
+                    !value ? "This field is required" : undefined,
+                }}
+              >
+                {(field) => {
+                  return (
+                    <Input
+                      name={field.name}
+                      value={field.state.value as string}
+                      label="Password"
+                      placeholder="Input Password"
+                      labelPlacement="outside"
+                      radius="sm"
+                      type="password"
+                      isInvalid={field.state.meta.errors.length > 0}
+                      errorMessage={field.state.meta.errors[0]}
+                      endContent={<RiLockPasswordFill />}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                    />
+                  );
+                }}
+              </form.Field>
+              <Button
+                color="warning"
+                radius="full"
+                className="text-white w-full mt-14"
+                type="submit"
+              >
+                Login
+              </Button>
+            </form>
             <div className="w-full justify-center flex">
               <Link href="/" className="text-xs" color="warning">
                 Go Home

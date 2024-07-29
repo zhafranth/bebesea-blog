@@ -10,6 +10,7 @@ import {
   getPodcast,
   getPost,
   getPosts,
+  getProfile,
   getUsers,
   getVideos,
   updatePost,
@@ -217,5 +218,12 @@ export const usePodcast = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["podcast"] });
     },
+  });
+};
+
+export const useFetchProfile = () => {
+  return useQuery({
+    queryKey: ["profile"],
+    queryFn: () => getProfile(),
   });
 };

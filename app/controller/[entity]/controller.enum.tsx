@@ -119,24 +119,4 @@ export const ENUMS = [
       },
     ],
   },
-  {
-    key: "podcast",
-    label: "Podcast",
-    columns: [
-      {
-        key: "title",
-        label: "Title",
-        width: 350,
-      },
-      {
-        key: "url",
-        label: "URL",
-      },
-      {
-        key: "action",
-        label: "Action",
-        // render: (data: Video) => <ActionVideos data={data} />,
-      },
-    ],
-  },
 ];

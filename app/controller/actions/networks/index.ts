@@ -14,6 +14,7 @@ import {
   actionUpdateVideo,
   actionGetPodcast,
   actionUpdatePodcast,
+  actionGetProfile,
 } from "..";
 import {
   CommentPayload,
@@ -104,5 +105,10 @@ export const getPodcast = async () => {
 
 export const updatePodcast = async (data: PodcastPayload) => {
   const response = await actionUpdatePodcast(data);
+  return response;
+};
+
+export const getProfile = async () => {
+  const response = await actionGetProfile();
   return response;
 };

@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/utils/cn";
+import useProfile from "@/utils/hooks/useProfile";
 import { Button } from "@nextui-org/react";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useMemo } from "react";
@@ -8,12 +9,18 @@ import React, { useMemo } from "react";
 const SidebarButton = ({
   data,
 }: {
-  data: { path: string; label: string; icon: React.JSX.Element };
+  data: {
+    path: string;
+    label: string;
+    icon: React.JSX.Element;
+    adminOnly: boolean;
+  };
 }) => {
-  const { path, icon, label } = data;
+  const { path, icon, label, adminOnly } = data;
+
+  const { user } = useProfile();
 
   const router = useRouter();
-
   const pathname = usePathname();
 
   const entity = useMemo(() => pathname.split("/")[2], [pathname]);
@@ -21,6 +28,10 @@ const SidebarButton = ({
   const isActive = useMemo(() => {
     return path === entity;
   }, [path, entity]);
+
+  if (adminOnly && user?.role !== "ADMIN") {
+    return <></>;
+  }
 
   return (
     <Button

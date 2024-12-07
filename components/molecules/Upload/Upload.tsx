@@ -9,9 +9,11 @@ const Upload = ({
   onChange,
   name,
   value,
+  path,
 }: {
   onChange: (e: string | null) => void;
   name: string;
+  path: string;
   value?: string;
 }) => {
   const { mutateUpload, mutateRemove } = useUpload();
@@ -37,7 +39,7 @@ const Upload = ({
       } else {
         const data = new FormData();
         data.set("file", file as File);
-        data.set("path", "cover" as string);
+        data.set("path", path as string);
 
         mutateUpload(data, {
           onSuccess(data) {

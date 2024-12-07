@@ -3,6 +3,7 @@
 import { prisma } from "@/lib/prisma";
 import {
   CommentPayload,
+  InstagramPayload,
   PodcastPayload,
   PostPayload,
   UserPayload,
@@ -337,5 +338,49 @@ export const actionGetProfile = async () => {
     return { user };
   } catch (error) {
     throw new Error("Failed to update podcast");
+  }
+};
+
+// INSTAGRAM FEED ======================================
+
+export const actionGetInstagram = async (params?: {
+  page?: number;
+  limit?: number;
+}) => {
+  try {
+    const { page = 1, limit = 20 } = params ?? {};
+    const instagram = await prisma.instagram.findMany({
+      take: +limit,
+      skip: +limit * (+page - 1),
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    const total = await prisma.instagram.count();
+
+    console.log("instagram:", instagram);
+    return {
+      data: instagram,
+      total: total || 0,
+      status: 200,
+    };
+  } catch (error) {
+    throw new Error("Failed to fetch instagram data");
+  }
+};
+
+export const actionCreateInstagram = async (data: InstagramPayload) => {
+  try {
+    await prisma.instagram.create({
+      data,
+    });
+    return {
+      status: 200,
+      message: "Success create instagram",
+    };
+  } catch (error) {
+    console.log("error:", error);
+    throw new Error("Failed to create instagram");
   }
 };

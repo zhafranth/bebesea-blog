@@ -15,15 +15,18 @@ import {
   actionGetPodcast,
   actionUpdatePodcast,
   actionGetProfile,
+  actionGetInstagram,
+  actionCreateInstagram,
 } from "..";
 import {
   CommentPayload,
+  InstagramPayload,
   PodcastPayload,
   PostPayload,
   UserPayload,
   VideoPayload,
 } from "../interface";
-import type { Podcast, Post, Video } from "@prisma/client";
+import type { Instagram, Podcast, Post, Video } from "@prisma/client";
 
 export const getUsers = async () => {
   const response = await actionGetUsers();
@@ -87,6 +90,7 @@ export const createVideo = async (data: VideoPayload) => {
   const response = await actionCreateVideo(data);
   return response;
 };
+
 export const updateVideo = async (data: VideoPayload, id: string) => {
   const response = await actionUpdateVideo(data, id);
   return response;
@@ -110,5 +114,19 @@ export const updatePodcast = async (data: PodcastPayload) => {
 
 export const getProfile = async () => {
   const response = await actionGetProfile();
+  return response;
+};
+
+export const getInstagram = async (params?: {
+  page?: number;
+  limit?: number;
+}) => {
+  const response: { data: Instagram[]; status: number; total: number } =
+    await actionGetInstagram(params);
+  return response;
+};
+
+export const createInstagram = async (data: InstagramPayload) => {
+  const response = await actionCreateInstagram(data);
   return response;
 };

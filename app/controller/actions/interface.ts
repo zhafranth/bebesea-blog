@@ -29,6 +29,11 @@ export interface VideoPayload {
   title: string;
   url: string;
 }
+export interface InstagramPayload {
+  title: string;
+  url: string;
+  cover: string;
+}
 export interface PodcastPayload {
   title: string;
   url: string;

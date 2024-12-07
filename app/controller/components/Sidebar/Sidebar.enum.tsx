@@ -1,5 +1,5 @@
 import { FaUsers, FaYoutube } from "react-icons/fa";
-import { FaPodcast } from "react-icons/fa6";
+import { FaInstagram, FaPodcast } from "react-icons/fa6";
 import { SiGitbook } from "react-icons/si";
 
 export const SIDEBAR_ENUM = [
@@ -26,5 +26,11 @@ export const SIDEBAR_ENUM = [
     label: "Podcast",
     adminOnly: true,
     icon: <FaPodcast />,
+  },
+  {
+    path: "instagram",
+    label: "Instagram Feed",
+    adminOnly: true,
+    icon: <FaInstagram />,
   },
 ];

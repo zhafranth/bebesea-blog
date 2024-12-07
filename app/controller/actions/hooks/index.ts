@@ -1,12 +1,14 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   createComment,
+  createInstagram,
   createPost,
   createUser,
   createVideo,
   delComment,
   delPost,
   delVideo,
+  getInstagram,
   getPodcast,
   getPost,
   getPosts,
@@ -18,6 +20,7 @@ import {
 } from "../networks";
 import {
   CommentPayload,
+  InstagramPayload,
   PodcastPayload,
   PostPayload,
   UserPayload,
@@ -132,6 +135,10 @@ export const useGetTableList = (
       if (entity === "videos") {
         return getVideos(params);
       }
+      if (entity === "instagram") {
+        console.log("this iscalled");
+        return getInstagram(params);
+      }
     },
   });
 };
@@ -226,4 +233,42 @@ export const useFetchProfile = () => {
     queryKey: ["profile"],
     queryFn: () => getProfile(),
   });
+};
+
+export const useInstagram = () => {
+  const queryClient = useQueryClient();
+
+  const { mutate: mutateCreateInstagram, isPending: pendingCreateInstagram } =
+    useMutation({
+      mutationFn: (data: InstagramPayload) => createInstagram(data),
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["table-list"] });
+      },
+    });
+
+  // const { mutate: mutateUpdateVideo, isPending: pendingUpdateVideo } =
+  //   useMutation({
+  //     mutationFn: ({ data, id }: { data: VideoPayload; id: string }) =>
+  //       updateVideo(data, id),
+  //     onSuccess: () => {
+  //       queryClient.invalidateQueries({ queryKey: ["table-list"] });
+  //     },
+  //   });
+
+  // const { mutate: mutateDeleteVideo, isPending: pendingDeleteVideo } =
+  //   useMutation({
+  //     mutationFn: (id: string) => delVideo(id),
+  //     onSuccess: () => {
+  //       queryClient.invalidateQueries({ queryKey: ["table-list"] });
+  //     },
+  //   });
+
+  return {
+    mutateCreateInstagram,
+    pendingCreateInstagram,
+    // mutateUpdateVideo,
+    // pendingUpdateVideo,
+    // mutateDeleteVideo,
+    // pendingDeleteVideo,
+  };
 };

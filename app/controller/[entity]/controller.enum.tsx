@@ -12,6 +12,7 @@ import SearchPost from "./components/post/SearchPost";
 import TitlePost from "./components/post/TitlePost";
 import ButtonAddVideos from "./components/videos/ButtonAddVideos";
 import ActionVideos from "./components/videos/ActionVideos";
+import ButtonAddInstagramFeed from "./components/instagram/ButtonAddInstagramFeed";
 
 export const ENUMS = [
   {
@@ -116,6 +117,27 @@ export const ENUMS = [
         key: "action",
         label: "Action",
         render: (data: Video) => <ActionVideos data={data} />,
+      },
+    ],
+  },
+  {
+    key: "instagram",
+    label: "Instagram",
+    extendButton: <ButtonAddInstagramFeed />,
+    columns: [
+      {
+        key: "title",
+        label: "Title",
+        width: 350,
+      },
+      {
+        key: "url",
+        label: "URL",
+      },
+      {
+        key: "action",
+        label: "Action",
+        // render: (data: Video) => <ActionVideos data={data} />,
       },
     ],
   },

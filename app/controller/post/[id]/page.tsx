@@ -327,6 +327,7 @@ const Detail = () => {
                     name={field.name}
                     onChange={(value) => field.handleChange(value as string)}
                     value={field.state.value || ""}
+                    path="cover"
                   />
                   {field.state.meta.errors.map((item, index) => (
                     <p className="text-danger-400 mt-1 text-xs" key={index}>

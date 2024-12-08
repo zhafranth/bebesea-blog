@@ -39,6 +39,6 @@ jobs:
           # local-dir: .next/
           # server-dir: /blog/
           # port: 21
-          # passive: true
-          # only-upload-changed: true
-          # timeout: 120
+          passive: true
+          only-upload-changed: true
+          timeout: 120

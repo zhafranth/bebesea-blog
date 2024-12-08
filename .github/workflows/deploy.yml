@@ -36,6 +36,6 @@ jobs:
           host: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: .next/
-          server-dir: /blog/
+          source: .next/
+          target: /blog/
           port: 21

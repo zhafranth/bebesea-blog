@@ -31,11 +31,13 @@ jobs:
 
       # Step 5: Upload build files to cPanel via SFTP
       - name: Deploy to cPanel
-        uses: appleboy/scp-action@master
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          host: 103.185.53.66
+          server: 103.185.53.66
           username: bebeseaa
-          key: 07XqLd1w0t
-          source: .next/
-          target: /blog/
+          password: 07XqLd1w0t
+          local-dir: .next/
+          server-dir: /blog/
+          # source: .next/
+          # target: /blog/
           port: 22

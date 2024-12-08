@@ -33,9 +33,9 @@ jobs:
       - name: Deploy to cPanel
         uses: appleboy/scp-action@master
         with:
-          host: ftp.bebesea.asia
+          host: 103.185.53.66
           username: git@bebesea.asia
           password: bebeseaRoot2024
           source: .next/
           target: /blog/
-          port: 21
+          port: 22

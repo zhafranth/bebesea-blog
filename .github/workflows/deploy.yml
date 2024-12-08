@@ -1,4 +1,4 @@
-name: Deploy Next.js App to cPanel via FTP
+name: Deploy Next.js App to cPanel via SFTP
 
 on:
   push:
@@ -31,9 +31,9 @@ jobs:
 
       # Step 5: Upload build files to cPanel via FTP
       - name: Deploy to cPanel
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: appleboy/scp-action@master
         with:
-          server: 103.185.53.66
+          host: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: .next/

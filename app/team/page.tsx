@@ -2,9 +2,10 @@ import TitleSection from "@/components/molecules/TitleSection";
 import { Tooltip } from "@nextui-org/react";
 import Image from "next/image";
 import React from "react";
-import { data } from "./data.json";
+import importedData from "./data.json";
 
 const Team = () => {
+  const { data = [] } = importedData;
   return (
     <main className="container">
       <TitleSection isCenter label="Bebesea Secretariat" />
@@ -33,6 +34,7 @@ const Team = () => {
             <div className="w-full h-full text-center ">
               <div className="w-[300px] h-[300px] overflow-hidden flex mx-auto mb-2  rounded-lg">
                 <Image
+                  unoptimized
                   width={2262}
                   height={1509}
                   src={image}

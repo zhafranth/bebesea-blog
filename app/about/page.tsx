@@ -10,6 +10,7 @@ const About = () => {
       <div className="flex sm:flex-row flex-col items-center gap-4 mb-12">
         <div className="flex-1 overflow-hidden rounded-md relative">
           <Image
+            unoptimized
             // radius="none"
             width={2262}
             height={1509}
@@ -45,6 +46,7 @@ const About = () => {
       </div>
       <Divider />
       <Image
+        unoptimized
         // radius="none"
         width={2262}
         height={1509}

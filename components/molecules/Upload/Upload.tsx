@@ -48,7 +48,7 @@ const Upload = ({
         });
       }
     },
-    [mutateUpload, onChange]
+    [mutateUpload, onChange, path]
   );
 
   const onRemoveFile = useCallback(() => {

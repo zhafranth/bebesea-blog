@@ -29,7 +29,7 @@ const Card = ({ data }: { data: Post }) => {
       <CardHeader>
         <div className="w-full bg-neutral-200 h-[180px] rounded-md overflow-hidden">
           <Image
-            // radius="none"
+            unoptimized
             width={2262}
             height={1509}
             src={cover || "/images/sample-cover-card.jpeg"}

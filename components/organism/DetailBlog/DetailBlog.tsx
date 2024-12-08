@@ -60,6 +60,7 @@ const DetailBlog = () => {
           src={cover || "/images/sample-cover-card.jpeg"}
           alt="Hero Detail Blog"
           className="w-full h-full object-cover"
+          unoptimized
         />
       </div>
 

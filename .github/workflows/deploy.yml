@@ -36,9 +36,9 @@ jobs:
           server: 103.185.53.66
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          # local-dir: .next/
-          # server-dir: /blog/
-          # port: 21
-          # passive: true
-          # only-upload-changed: true
-          # timeout: 120
+          local-dir: .next/
+          server-dir: /blog/
+          port: 21
+          passive: true
+          only-upload-changed: true
+          timeout: 120

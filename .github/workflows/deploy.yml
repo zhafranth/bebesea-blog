@@ -12,11 +12,11 @@ jobs:
     steps:
       # Step 1: Checkout repository
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Step 2: Set up Node.js
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v2
         with:
           node-version: 18
           cache: "yarn"
@@ -31,14 +31,14 @@ jobs:
 
       # Step 5: Upload build files to cPanel via FTP
       - name: Deploy to cPanel
-        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        uses: SamKirkland/FTP-Deploy-Action@4.3.5
         with:
           server: 103.185.53.66
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: .next/
-          server-dir: /blog/
-          port: 21
-          passive: true
-          only-upload-changed: true
-          timeout: 120
+          # local-dir: .next/
+          # server-dir: /blog/
+          # port: 21
+          # passive: true
+          # only-upload-changed: true
+          # timeout: 120

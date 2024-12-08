@@ -35,6 +35,7 @@ jobs:
         with:
           host: 103.185.53.66
           username: bebeseaa
+          password: 07XqLd1w0t
           key: 07XqLd1w0t
           source: .next/
           target: /blog/

@@ -36,6 +36,6 @@ jobs:
           host: ${{ secrets.FTP_HOSTNAME }}
           username: ${{ secrets.FTP_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: .next/
-          target: /blog/
+          # source: .next/
+          # target: /blog/
           port: 22

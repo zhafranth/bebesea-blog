@@ -33,8 +33,7 @@ jobs:
       - name: Deploy to cPanel
         uses: appleboy/scp-action@master
         with:
-          host: bebesea.asia
-          hostname: 103.185.53.66
+          host: 103.185.53.66
           username: bebeseaa
           key: 07XqLd1w0t
           source: .next/

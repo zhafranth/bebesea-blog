@@ -4,6 +4,7 @@ import "./globals.css";
 import { NextUIProvider } from "@nextui-org/react";
 import Layout from "@/components/organism/Layout/Layout";
 import ReactQueryProvider from "@/utils/ReactQueryProvider";
+import "@js-temporal/polyfill";
 
 const merriweather = Merriweather({
   weight: ["300", "400", "700", "900"],

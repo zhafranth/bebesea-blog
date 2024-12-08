@@ -29,11 +29,12 @@ jobs:
       - name: Build Next.js app
         run: yarn build
 
-      # Step 5: Upload build files to cPanel via FTP
+      # Step 5: Upload build files to cPanel via SFTP
       - name: Deploy to cPanel
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.FTP_SERVER }}
+          hostname: ${{ secrets.FTP_HOSTNAME }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           source: .next/

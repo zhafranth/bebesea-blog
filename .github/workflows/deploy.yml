@@ -19,15 +19,15 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: "npm"
+          cache: "yarn"
 
       # Step 3: Install dependencies
       - name: Install dependencies
-        run: npm install
+        run: yarn install
 
       # Step 4: Build the Next.js app
       - name: Build Next.js app
-        run: npm run build
+        run: yarn build
 
       # Step 5: Upload build files to cPanel via FTP
       - name: Deploy to cPanel

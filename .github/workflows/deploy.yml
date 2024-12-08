@@ -31,7 +31,7 @@ jobs:
 
       # Step 5: Upload build files to cPanel via FTP
       - name: Deploy to cPanel
-        uses: SamKirkland/FTP-Deploy-Action@4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: 103.185.53.66
           username: ${{ secrets.FTP_USERNAME }}

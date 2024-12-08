@@ -36,6 +36,6 @@ jobs:
           host: ftp.bebesea.asia
           username: git@bebesea.asia
           password: bebeseaRoot2024
-          # source: .next/
-          # target: /blog/
+          source: .next/
+          target: /blog/
           port: 21

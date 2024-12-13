@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* .reset-tw,
+.reset-tw * {
+  all: initial !important;
+} */
+
+.jodit-workplace,
+.jodit-react-container,
+.jodit-toolbar-button__text {
+  ol,
+  ul,
+  menu {
+    list-style: square;
+    margin: revert;
+    padding: revert;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: revert;
+    font-weight: revert;
+  }
+
+  blockquote,
+  dl,
+  dd,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  hr,
+  figure,
+  p,
+  pre {
+    margin: revert;
+  }
+}

@@ -1,0 +1,41 @@
+# name: Deploy Next.js App to cPanel via SFTP
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       # Step 1: Checkout repository
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+
+#       # Step 2: Set up Node.js
+#       - name: Set up Node.js
+#         uses: actions/setup-node@v2
+#         with:
+#           node-version: 18
+#           cache: "yarn"
+
+#       # Step 3: Install dependencies
+#       - name: Install dependencies
+#         run: yarn install
+
+#       # Step 4: Build the Next.js app
+#       - name: Build Next.js app
+#         run: yarn build
+
+#       # Step 5: Upload build files to cPanel via SFTP
+#       - name: Deploy to cPanel
+#         uses: appleboy/ssh-action@master
+#         with:
+#           host: ${{ secrets.FTP_HOSTNAME }}
+#           username: ${{ secrets.FTP_USERNAME }}
+#           key: ${{ secrets.SSH_PRIVATE_KEY }}
+#           source: .next/
+#           target: /blog/
+#           port: 22

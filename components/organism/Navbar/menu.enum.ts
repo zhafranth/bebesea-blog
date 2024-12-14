@@ -5,19 +5,45 @@ export const menus = [
     items: [
       {
         key: "about",
-        label: "About",
+        label: "About Bebesea",
         description: "Kisah kami, misi, nilai, dan filosofi perusahaan.",
       },
       {
         key: "partner",
-        label: "Partner",
+        label: "Our Partner",
         description: "Jalin relasi strategis untuk kemajuan bersama.",
       },
       {
         key: "team",
-        label: "Team",
+        label: "Our Team",
         description: "Talenta & dedikasi: Penggerak inovasi kami.",
       },
+    ],
+  },
+  {
+    key: "work",
+    label: "Our Work",
+    items: [
+      {
+        key: "articles",
+        label: "Articles",
+        description: "Wawasan mendalam dan artikel informatif.",
+      },
+      {
+        key: "publications",
+        label: "Publications",
+        description: "Temukan publikasi dan laporan resmi kami.",
+      },
+      {
+        key: "statements",
+        label: "Statements",
+        description: "Temukan publikasi dan laporan resmi kami.",
+      },
+      // {
+      //   key: "videos",
+      //   label: "Videos",
+      //   description: "Konten video menarik dan inspiratif.",
+      // },
     ],
   },
   {
@@ -34,31 +60,21 @@ export const menus = [
         label: "News",
         description: "Berita terkini dan informasi penting untuk Anda.",
       },
-      {
-        key: "region",
-        label: "Region",
-        description: "Jelajahi layanan kami di berbagai wilayah.",
-      },
+      // {
+      //   key: "region",
+      //   label: "Region",
+      //   description: "Jelajahi layanan kami di berbagai wilayah.",
+      // },
     ],
   },
   {
-    key: "resources",
-    label: "Resources",
+    key: "programs",
+    label: "Our Programs",
     items: [
       {
-        key: "articles",
-        label: "Articles",
-        description: "Wawasan mendalam dan artikel informatif.",
-      },
-      {
-        key: "publications",
-        label: "Publications",
-        description: "Temukan publikasi dan laporan resmi kami.",
-      },
-      {
-        key: "videos",
-        label: "Videos",
-        description: "Konten video menarik dan inspiratif.",
+        key: "story",
+        label: "Story Fellowship",
+        description: "Temukan acara menarik dan pelajari hal baru.",
       },
     ],
   },

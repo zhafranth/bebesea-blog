@@ -11,18 +11,21 @@ const Publications = () => {
       <div className="w-full min-h-[550px] bg-neutral-300 rounded-3xl overflow-hidden flex sm:flex-row flex-col">
         <div className="flex-1 p-12 bg-gradient-to-bl from-amber-900 via-amber-800 to-amber-600 text-white">
           <p className="sm:text-4xl text-2xl mb-4 line-clamp-5">
-            Short Stories Anthology by Indonesian Migrant Workers in Japan
-            “Morotomo” – Compiled by Anastasya W. Hasyim, BEBESEA Story Fellow
+            Research Report – Navigating the Currents: The Transnational
+            Challenges of Migrant Fishers from Southeast Asia (2024)
           </p>
           <Divider className="bg-white my-5" />
           <p className="text-sm font-light leading-loose line-clamp-6 sm:line-clamp-none">
-            “Morotomo” (もろとも), an anthology of short stories by Indonesian
-            migrant workers in Japan has been launched. Anastasya Wulandari
-            Hasyim, BEBESEA Story Fellow conducted a Short Story Contest for
-            Indonesian Migrant Workers on a platform established by her called
-            Iza Migrant Rights (@izamigrantrights), and compiled selected 15
-            best stories into this anthology book as a part of the fellowship
-            program.
+            This report, led by a research team of Paramadina University, is
+            produced by BEBESEA as part of our advocacy efforts to contribute to
+            the development of the above mentioned ASEAN Guideline, following
+            the adaptation of the ASEAN Declaration on the Placement and
+            Protection of Migrant Fishers in May 2024. This report provides an
+            in-depth background analysis to complement the “Policy Paper:
+            Proposal by the Regional Civil Society Consultation for the ASEAN
+            Guideline on the Placement and Protection of Migrant Fishers and
+            Their Families” which was consolidated by BEBESEA and the Human
+            Rights Working Group Indonesia (HRWG) in October 2023.
           </p>
           <Button
             className="text-white mt-4"

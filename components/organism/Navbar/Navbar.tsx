@@ -18,13 +18,14 @@ import {
 import React from "react";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { menus } from "./menu.enum";
+import Image from "next/image";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   return (
     <NavbarUI
-      className="bg-peach-400"
+      className="bg-white"
       classNames={{
         wrapper: "sm:max-w-[85vw] max-w-[95vw]",
       }}
@@ -33,9 +34,17 @@ const Header = () => {
       <NavbarBrand>
         <Link
           href="/"
-          className="font-bold text-inherit text-xl text-yellow-800"
+          className="font-bold w-[200px] text-inherit text-xl text-yellow-800"
         >
-          Bebesea
+          <Image
+            unoptimized
+            // radius="none"
+            width={2262}
+            height={1509}
+            src="/images/logo.png"
+            alt="Bebesea Logo"
+            className="w-full h-full object-cover"
+          />
         </Link>
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="end">
@@ -45,13 +54,13 @@ const Header = () => {
               <DropdownTrigger>
                 <Button
                   disableRipple
-                  className="p-0 bg-transparent data-[hover=true]:bg-transparent text-white"
+                  className="p-0 bg-transparent data-[hover=true]:bg-transparent text-slate-500"
                   radius="sm"
                   variant="light"
                   endContent={
                     <MdOutlineKeyboardArrowDown
                       size={18}
-                      className="text-yellow-700"
+                      className="text-slate-700"
                     />
                   }
                 >
@@ -79,6 +88,13 @@ const Header = () => {
             </DropdownMenu>
           </Dropdown>
         ))}
+        <Button
+          className="text-white bg-peach-500 text-xs px-4 py-2 rounded-md"
+          radius="sm"
+          // variant="light"
+        >
+          Join Us
+        </Button>
         {/* <NavbarItem>
           <Link
             size="sm"

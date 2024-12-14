@@ -72,23 +72,40 @@ const Team = () => {
       <ul className="list-disc ml-4 text-slate-600 font-light">
         <li>
           <p>Anderson Villa</p>
-          <p>Mindanao State University, General Santos City</p>
-        </li>
-        <li>
-          <p>Fajar Santoadi</p>
-          <p>Tenaganita</p>
-        </li>
-        <li>
-          <p>Fifi Ng</p>
-          <p>Migrant Solidarity Committee, Autonomous 8a</p>
+          <p>University of Mindanao, Philippines</p>
         </li>
         <li>
           <p>Jotaro Kato</p>
-          <p>Waseda University</p>
+          <p>Waseda University, Japan</p>
         </li>
         <li>
+          <p>Fajar Santoadi</p>
+          <p>Tenaganita, Malaysia</p>
+        </li>
+        <li>
+          <p>Suebsakun Kidnukorn</p>
+          <p>Mae Fah Luang University, Thailand</p>
+        </li>
+        <li>
+          <p>Fifi Ng</p>
+          <p> Autonomous8, Hong Kong</p>
+        </li>
+
+        <li>
           <p>Lennon Ying-Dah Wong</p>
-          <p>Serve the People Association, Taoyuan (SPA)</p>
+          <p>Serve The People Association (SPA), Taiwan</p>
+        </li>
+        <li>
+          <p>Jaya Anil Kumar</p>
+          <p> HOME Singapore, Singapore</p>
+        </li>
+        <li>
+          <p>Cecile “Yllang” Montenegro</p>
+          <p>Empowerment Through Art, Philippines</p>
+        </li>
+        <li>
+          <p>Pamungkas Ayudhaning</p>
+          <p>Mataram University, Indonesia</p>
         </li>
       </ul>
     </main>

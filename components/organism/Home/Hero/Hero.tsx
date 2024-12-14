@@ -20,9 +20,9 @@ const Hero = () => {
       </div>
       <div className="container flex flex-col h-full relative z-10">
         <h2 className="md:text-6xl text-5xl mb-4 font-semibold md:leading-relaxed leading-[1.3]">
-          <span className="bg-yellow-300 underline">Share</span>,{" "}
-          <span className="bg-yellow-300 underline">Connect</span> and <br />{" "}
-          <span className="bg-yellow-300 underline">Collaborate</span>
+          <span className="bg-peach-500 underline">Share</span>,{" "}
+          <span className="bg-peach-500 underline">Connect</span> and <br />{" "}
+          <span className="bg-peach-500 underline">Collaborate</span>
         </h2>
         <p className="md:text-lg text-base md:leading-loose text-neutral-500">
           Platform for sharing ideas and resources on the rights of migrants{" "}

@@ -23,7 +23,6 @@ const ModalInstagramAction = ({
 
   const form = useForm<InstagramPayload>({
     onSubmit: async ({ value }) => {
-      // console.log("value:", value);
       mutateCreateInstagram(value as InstagramPayload, {
         onSuccess: toggle,
       });
@@ -47,7 +46,7 @@ const ModalInstagramAction = ({
         {(onClose) => (
           <>
             <ModalHeader className="flex flex-col gap-1">
-              {type} User
+              {type} Instagram Feed
             </ModalHeader>
             <ModalBody>
               <form

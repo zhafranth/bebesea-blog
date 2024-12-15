@@ -4,23 +4,22 @@ import CardList from "@/components/organism/CardList";
 import React from "react";
 import { useGetPostsList } from "../actions/hooks";
 
-const Articles = () => {
+const Publication = () => {
   const { data, isLoading } = useGetPostsList({
     limit: 3,
-    category: "articles",
+    category: "publications",
   });
   const { data: posts = [], total = 0 } = data ?? {};
-
   return (
     <main className="container">
       <CardList
         isLoading={isLoading}
         data={posts}
         total={total}
-        label="Articles"
+        label="Story Fellowship"
       />
     </main>
   );
 };
 
-export default Articles;
+export default Publication;

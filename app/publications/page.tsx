@@ -5,11 +5,19 @@ import React from "react";
 import { useGetPostsList } from "../actions/hooks";
 
 const Publication = () => {
-  const { data } = useGetPostsList({ limit: 3, category: "publications" });
+  const { data, isLoading } = useGetPostsList({
+    limit: 3,
+    category: "publications",
+  });
   const { data: posts = [], total = 0 } = data ?? {};
   return (
     <main className="container">
-      <CardList data={posts} total={total} label="Publication" />
+      <CardList
+        isLoading={isLoading}
+        data={posts}
+        total={total}
+        label="Publication"
+      />
     </main>
   );
 };

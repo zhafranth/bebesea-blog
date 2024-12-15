@@ -43,7 +43,7 @@ const Upload = ({
 
         mutateUpload(data, {
           onSuccess(data) {
-            onChange(data?.data as unknown as string);
+            onChange(`https://bebesea.asia/${data?.data}` as unknown as string);
           },
         });
       }

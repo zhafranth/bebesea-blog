@@ -27,10 +27,10 @@ export const SIDEBAR_ENUM = [
     adminOnly: true,
     icon: <FaPodcast />,
   },
-  // {
-  //   path: "instagram",
-  //   label: "Instagram Feed",
-  //   adminOnly: true,
-  //   icon: <FaInstagram />,
-  // },
+  {
+    path: "instagram",
+    label: "Instagram Feed",
+    adminOnly: true,
+    icon: <FaInstagram />,
+  },
 ];

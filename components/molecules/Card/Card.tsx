@@ -32,10 +32,7 @@ const Card = ({ data }: { data: Post }) => {
             unoptimized
             width={2262}
             height={1509}
-            src={
-              `https://bebesea.asia/${cover}` ||
-              "/images/sample-cover-card.jpeg"
-            }
+            src={cover || "/images/sample-cover-card.jpeg"}
             alt="Hero Background"
             className="w-full h-full object-cover"
           />

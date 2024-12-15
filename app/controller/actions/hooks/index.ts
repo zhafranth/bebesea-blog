@@ -136,7 +136,6 @@ export const useGetTableList = (
         return getVideos(params);
       }
       if (entity === "instagram") {
-        console.log("this iscalled");
         return getInstagram(params);
       }
     },
@@ -232,6 +231,13 @@ export const useFetchProfile = () => {
   return useQuery({
     queryKey: ["profile"],
     queryFn: () => getProfile(),
+  });
+};
+
+export const useGetInstagram = (params?: { page?: number; limit?: number }) => {
+  return useQuery({
+    queryKey: ["instagram", params],
+    queryFn: () => getInstagram(params),
   });
 };
 

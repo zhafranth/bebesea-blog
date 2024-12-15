@@ -20,8 +20,6 @@ const ControllerList = ({
       return ENUMS.find((item) => item.key === entity);
     }, [entity]) || {};
 
-  console.log("list:", list);
-
   return (
     <div className="p-8">
       <div className="flex justify-between mb-4">

@@ -3,4 +3,5 @@ export interface ParamsPosts {
   limit?: number;
   search?: string;
   category?: string;
+  tags?: string[];
 }

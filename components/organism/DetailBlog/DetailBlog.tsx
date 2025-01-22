@@ -118,9 +118,7 @@ const DetailBlog = () => {
       </div>
 
       <div className="flex gap-12 my-8">
-        <div className="flex-1 text-blue-700">
-          {htmlParser(content as string)}
-        </div>
+        <div className="flex-1">{htmlParser(content as string)}</div>
 
         <div className="w-[30%] sm:block hidden ">
           <div className="flex items-center self-start gap-x-4">

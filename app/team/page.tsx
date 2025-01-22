@@ -7,7 +7,7 @@ import importedData from "./data.json";
 const Team = () => {
   const { data = [] } = importedData;
   return (
-    <main className="container">
+    <main className="container mb-24">
       <TitleSection isCenter label="Bebesea Secretariat" />
       <div className="flex flex-col gap-y-4 leading-loose">
         <p>
@@ -26,7 +26,6 @@ const Team = () => {
           The Secretariat is currently hosted by HRWG Indonesia, with the
           support of the Sasakawa Peace Foundation in Japan.
         </p>
-        <p> Meet the BEBESEA Secretariat:</p>
       </div>
       <div className="flex flex-wrap my-20">
         {data.map(({ description, image, jobs, name, position }, index) => (
@@ -39,7 +38,7 @@ const Team = () => {
                   height={1509}
                   src={image}
                   alt={`${name} Photo`}
-                  className="h-full w-full object-contain"
+                  className="h-full w-full object-cover"
                 />
               </div>
               <h4 className="text-xl font-semibold">{name}</h4>
@@ -60,15 +59,14 @@ const Team = () => {
         ))}
       </div>
 
-      <TitleSection isCenter label="Bebesea Steering Committee" />
+      <TitleSection isCenter label="BEBESEA Advisory Board" />
       <p className="mb-4">
-        The Steering Committee supports the secretariat as its advisory body.
-        The main purpose of the committee is to develop strategies on advocacy,
+        The Advisory Board supports the secretariat as its advisory body. The
+        main purpose of the committee is to develop strategies on advocacy,
         organisational principles and policies, network development and
         fundraising and to provide management guidance and advice to the
         secretariat.
       </p>
-      <p className="mb-2">Here are the BEBESEA Steering Committee:</p>
       <ul className="list-disc ml-4 text-slate-600 font-light">
         <li>
           <p>Anderson Villa</p>

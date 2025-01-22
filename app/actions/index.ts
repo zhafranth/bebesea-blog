@@ -5,7 +5,14 @@ import { ParamsPosts } from "./interface";
 
 export const actionGetPostList = async (params?: ParamsPosts) => {
   try {
-    const { page = 1, search, category, limit = 20 } = params ?? {};
+    const { page = 1, search, category, tags = [], limit = 20 } = params ?? {};
+
+    const tagsList = tags?.map((item) => ({
+      tags: {
+        contains: item,
+      },
+    }));
+
     const posts = await prisma.post.findMany({
       where: {
         title: {
@@ -13,6 +20,7 @@ export const actionGetPostList = async (params?: ParamsPosts) => {
         },
         category,
         status: "publish",
+        OR: tags.length > 0 ? tagsList : undefined,
       },
       include: {
         author: {
@@ -36,6 +44,8 @@ export const actionGetPostList = async (params?: ParamsPosts) => {
           contains: search as string,
         },
         category,
+        status: "publish",
+        OR: tags.length > 0 ? tagsList : undefined,
       },
     });
 

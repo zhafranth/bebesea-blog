@@ -25,7 +25,7 @@ const Header = () => {
 
   return (
     <NavbarUI
-      className="bg-white"
+      className="bg-white z-50"
       classNames={{
         wrapper: "sm:max-w-[85vw] max-w-[95vw]",
       }}
@@ -51,22 +51,35 @@ const Header = () => {
         {menus.map(({ items, key, label }) => (
           <Dropdown key={key}>
             <NavbarItem>
-              <DropdownTrigger>
-                <Button
-                  disableRipple
-                  className="p-0 bg-transparent data-[hover=true]:bg-transparent text-slate-500"
-                  radius="sm"
-                  variant="light"
-                  endContent={
-                    <MdOutlineKeyboardArrowDown
-                      size={18}
-                      className="text-slate-700"
-                    />
-                  }
-                >
-                  {label}
-                </Button>
-              </DropdownTrigger>
+              {items.length > 0 ? (
+                <DropdownTrigger>
+                  <Button
+                    disableRipple
+                    className="p-0 bg-transparent data-[hover=true]:bg-transparent text-slate-500"
+                    radius="sm"
+                    variant="light"
+                    endContent={
+                      <MdOutlineKeyboardArrowDown
+                        size={18}
+                        className="text-slate-700"
+                      />
+                    }
+                  >
+                    {label}
+                  </Button>
+                </DropdownTrigger>
+              ) : (
+                <Link href={`/${key}`}>
+                  <Button
+                    disableRipple
+                    className="p-0 bg-transparent data-[hover=true]:bg-transparent text-slate-500"
+                    radius="sm"
+                    variant="light"
+                  >
+                    {label}
+                  </Button>
+                </Link>
+              )}
             </NavbarItem>
             <DropdownMenu
               aria-label="ACME features"
@@ -79,7 +92,7 @@ const Header = () => {
                 <DropdownItem
                   key={item.key}
                   className="data-[hover=true]:bg-yellow-100"
-                  description={item.description}
+                  // description={item.description}
                   href={`/${item.key}`}
                 >
                   <p className="text-yellow-600">{item.label}</p>
@@ -88,13 +101,13 @@ const Header = () => {
             </DropdownMenu>
           </Dropdown>
         ))}
-        <Button
+        {/* <Button
           className="text-white bg-peach-500 text-xs px-4 py-2 rounded-md"
           radius="sm"
           // variant="light"
         >
           Join Us
-        </Button>
+        </Button> */}
         {/* <NavbarItem>
           <Link
             size="sm"

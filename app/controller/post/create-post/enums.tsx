@@ -33,8 +33,12 @@ export const CATEGORY_OPTIONS = [
     label: "News",
   },
   {
-    key: "articles",
-    label: "Articles",
+    key: "story",
+    label: "Story",
+  },
+  {
+    key: "story-fellowship",
+    label: "Story Fellowship",
   },
   {
     key: "publications",

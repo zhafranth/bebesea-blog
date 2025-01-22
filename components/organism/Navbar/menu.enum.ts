@@ -10,33 +10,33 @@ export const menus = [
       },
       {
         key: "partner",
-        label: "Our Partner",
+        label: "Partners",
         description: "Jalin relasi strategis untuk kemajuan bersama.",
       },
       {
         key: "team",
-        label: "Our Team",
+        label: "Team and Board",
         description: "Talenta & dedikasi: Penggerak inovasi kami.",
       },
     ],
   },
   {
-    key: "work",
-    label: "Our Work",
+    key: "news",
+    label: "News",
     items: [
       {
-        key: "articles",
-        label: "Articles",
+        key: "news",
+        label: "Our Newsletter",
         description: "Wawasan mendalam dan artikel informatif.",
       },
       {
-        key: "publications",
-        label: "Publications",
+        key: "press-release",
+        label: "Our Press Releases",
         description: "Temukan publikasi dan laporan resmi kami.",
       },
       {
-        key: "statements",
-        label: "Statements",
+        key: "event",
+        label: "Our Events",
         description: "Temukan publikasi dan laporan resmi kami.",
       },
       // {
@@ -47,35 +47,13 @@ export const menus = [
     ],
   },
   {
-    key: "explore",
-    label: "Explore",
-    items: [
-      {
-        key: "event",
-        label: "Event",
-        description: "Temukan acara menarik dan pelajari hal baru.",
-      },
-      {
-        key: "news",
-        label: "News",
-        description: "Berita terkini dan informasi penting untuk Anda.",
-      },
-      // {
-      //   key: "region",
-      //   label: "Region",
-      //   description: "Jelajahi layanan kami di berbagai wilayah.",
-      // },
-    ],
+    key: "story",
+    label: "Stories",
+    items: [],
   },
   {
-    key: "programs",
-    label: "Our Programs",
-    items: [
-      {
-        key: "story",
-        label: "Story Fellowship",
-        description: "Temukan acara menarik dan pelajari hal baru.",
-      },
-    ],
+    key: "publications",
+    label: "Publications",
+    items: [],
   },
 ];

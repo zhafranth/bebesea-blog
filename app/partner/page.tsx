@@ -1,12 +1,13 @@
 import TitleSection from "@/components/molecules/TitleSection";
 import Image from "next/image";
 import React from "react";
+import { PARTNERS } from "./Partner.enum";
 
 const Partner = () => {
   return (
-    <main className="container">
+    <main className="container mb-24">
       <TitleSection isCenter label="Partnership & Collaboration Model" />
-      <div className="my-12 flex flex-col gap-y-8 leading-loose">
+      <div className="my-12 flex flex-col gap-y-8 text-xl leading-10 text-slate-600">
         <p>
           The initiative works closely and collaboratively with a range of
           different actors and organizations in the migration and human rights
@@ -23,14 +24,14 @@ const Partner = () => {
           amplify voices to affect changes.
         </p>
       </div>
-      <Image
-        // radius="none"
-        width={2262}
-        height={1509}
-        src="/images/partner-image.png"
-        alt="About Page"
-        className="w-full h-full object-cover"
-      />
+
+      <ol className="list-decimal">
+        {PARTNERS.map((item, index) => (
+          <li key={index}>
+            <p className="text-xl leading-10 text-slate-600">{item}</p>
+          </li>
+        ))}
+      </ol>
     </main>
   );
 };

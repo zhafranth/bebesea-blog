@@ -10,15 +10,17 @@ const CardList = ({
   label,
   total,
   isLoading,
+  isCenter = true,
 }: {
   data: Post[];
   label: string;
   total: number;
   isLoading?: boolean;
+  isCenter?: boolean;
 }) => {
   return (
     <>
-      <TitleSection label={label} isCenter />
+      <TitleSection label={label} isCenter={isCenter} />
       <div className="flex gap-6 justify-between flex-wrap">
         {isLoading && <LoadingCard />}
         {data.map((item, index) => (

@@ -4,10 +4,14 @@ import CardList from "@/components/organism/CardList";
 import React from "react";
 import { useGetPostsList } from "../actions/hooks";
 
-const Articles = () => {
+const Articles = ({
+  searchParams,
+}: {
+  searchParams: { page: number; search: string; status: string; tags: string };
+}) => {
+  const { tags } = searchParams;
   const { data, isLoading } = useGetPostsList({
-    limit: 3,
-    category: "articles",
+    tags: tags ? JSON.parse(tags) : [],
   });
   const { data: posts = [], total = 0 } = data ?? {};
 

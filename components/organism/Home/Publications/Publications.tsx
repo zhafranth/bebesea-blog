@@ -6,8 +6,32 @@ import { IoIosArrowRoundForward } from "react-icons/io";
 
 const Publications = () => {
   return (
-    <div className="container my-12">
-      <TitleSection label="Publications" />
+    <div className="mt-12 bg-[#385653] py-12 overflow-hidden">
+      <div className="container relative">
+        <div className="flex flex-col w-1/2">
+          <h2 className="text-3xl bg-orange-700 text-white inline-block self-baseline">
+            Publications
+          </h2>
+          <p className="text-5xl text-white my-4 leading-[55px]">
+            Research Report – Navigating the Currents: The Transnational
+            Challenges of Migrant Fishers from Southeast Asia (2024)
+          </p>
+          <Button className="self-baseline bg-white text-orange-700 font-semibold">
+            See More
+          </Button>
+        </div>
+        <div className="absolute right-0 top-[-25%] w-1/2  items-center justify-center overflow-hidden rounded-lg">
+          <Image
+            // radius="none"
+            width={4262}
+            height={4262}
+            src="/images/publications-cover.png"
+            alt="Hero Background"
+            className="w-full object-cover transform scale-110"
+          />
+        </div>
+      </div>
+      {/* <TitleSection label="Publications" />
       <div className="w-full min-h-[550px] bg-neutral-300 rounded-3xl overflow-hidden flex sm:flex-row flex-col">
         <div className="flex-1 p-12 bg-gradient-to-bl from-amber-900 via-amber-800 to-amber-600 text-white">
           <p className="sm:text-4xl text-2xl mb-4 line-clamp-5">
@@ -38,18 +62,18 @@ const Publications = () => {
           </Button>
         </div>
         <div className="flex-1 p-12 bg-yellow-50">
-          <div className="w-full h-full overflow-hidden rounded-lg">
+          <div className="w-full items-center justify-center bg-blue-50 overflow-hidden rounded-lg">
             <Image
               // radius="none"
-              width={2262}
-              height={1509}
-              src="/images/publication-cover-sample.jpeg"
+              width={4262}
+              height={4262}
+              src="/images/publications-cover.png"
               alt="Hero Background"
-              className="w-full h-full object-cover"
+              className=""
             />
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

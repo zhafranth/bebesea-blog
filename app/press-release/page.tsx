@@ -4,17 +4,23 @@ import CardList from "@/components/organism/CardList";
 import React from "react";
 import { useGetPostsList } from "../actions/hooks";
 
-const News = () => {
+const PressRelease = () => {
   const { data, isLoading } = useGetPostsList({
     limit: 3,
-    tags: ["xx"],
+    category: "articles",
   });
   const { data: posts = [], total = 0 } = data ?? {};
+
   return (
     <main className="container">
-      <CardList isLoading={isLoading} data={posts} total={total} label="News" />
+      <CardList
+        isLoading={isLoading}
+        data={posts}
+        total={total}
+        label="Press Release"
+      />
     </main>
   );
 };
 
-export default News;
+export default PressRelease;

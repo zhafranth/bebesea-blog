@@ -26,24 +26,19 @@ export const menus = [
     items: [
       {
         key: "news",
-        label: "Our Newsletter",
+        label: "Newsletter",
         description: "Wawasan mendalam dan artikel informatif.",
       },
       {
         key: "press-release",
-        label: "Our Press Releases",
+        label: "Press Releases",
         description: "Temukan publikasi dan laporan resmi kami.",
       },
       {
         key: "event",
-        label: "Our Events",
+        label: "Events",
         description: "Temukan publikasi dan laporan resmi kami.",
       },
-      // {
-      //   key: "videos",
-      //   label: "Videos",
-      //   description: "Konten video menarik dan inspiratif.",
-      // },
     ],
   },
   {

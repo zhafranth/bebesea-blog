@@ -12,7 +12,7 @@ const Latest = () => {
 
   return (
     <section id="articles" className="container">
-      <h2 className="text-center text-5xl mb-6 font-semibold text-orange-700">
+      <h2 className="text-center text-4xl mb-6 font-semibold text-orange-700">
         Stay Updated
       </h2>
       <div className="flex gap-x-6 justify-between flex-wrap">

@@ -1,9 +1,12 @@
+"use client";
+
+import React, { useCallback, useState } from "react";
+import { Pagination } from "@nextui-org/react";
 import Card from "@/components/molecules/Card/Card";
 import LoadingCard from "@/components/molecules/Loading/LoadingCard";
 import TitleSection from "@/components/molecules/TitleSection";
-import { Pagination } from "@nextui-org/react";
 import { Post } from "@prisma/client";
-import React from "react";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 const CardList = ({
   data = [],
@@ -18,6 +21,27 @@ const CardList = ({
   isLoading?: boolean;
   isCenter?: boolean;
 }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
+  const handleChangePage = useCallback(
+    (value: number) => {
+      setCurrentPage(value);
+      const params = new URLSearchParams(searchParams);
+      if (value) {
+        params.set("page", value as unknown as string);
+      } else {
+        params.delete("page");
+      }
+
+      replace(`${pathname}?${params.toString()}`);
+    },
+    [pathname, replace, searchParams]
+  );
+
   return (
     <>
       <TitleSection label={label} isCenter={isCenter} />
@@ -28,7 +52,12 @@ const CardList = ({
         ))}
       </div>
       <div className="my-8 flex justify-center">
-        <Pagination total={total} initialPage={1} color="warning" />
+        <Pagination
+          total={Math.ceil(total / 20)}
+          page={currentPage}
+          color="warning"
+          onChange={handleChangePage}
+        />
       </div>
     </>
   );

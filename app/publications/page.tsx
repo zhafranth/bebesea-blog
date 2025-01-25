@@ -1,8 +1,12 @@
 "use client";
 
-import CardList from "@/components/organism/CardList";
 import React from "react";
 import { useGetPostsList } from "../actions/hooks";
+import dynamic from "next/dynamic";
+
+const CardList = dynamic(() => import("@/components/organism/CardList"), {
+  ssr: false,
+});
 
 const Publication = () => {
   const { data, isLoading } = useGetPostsList({

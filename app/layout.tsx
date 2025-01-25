@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Merriweather } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { NextUIProvider } from "@nextui-org/react";
 import Layout from "@/components/organism/Layout/Layout";
 import ReactQueryProvider from "@/utils/ReactQueryProvider";
 import "@js-temporal/polyfill";
 
-const merriweather = Merriweather({
+const inter = Inter({
   weight: ["300", "400", "700", "900"],
   subsets: ["latin"],
 });
@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={merriweather.className}>
+      <body className={inter.className}>
         <ReactQueryProvider>
           <NextUIProvider>
             <Layout>{children}</Layout>

@@ -15,6 +15,7 @@ const Modal = ({
   onConfirm,
   confirmText = "Submit",
   cancelText = "Close",
+  footer = [],
 }: {
   toggle: () => void;
   onConfirm?: () => void;
@@ -22,6 +23,7 @@ const Modal = ({
   children: React.ReactNode;
   confirmText?: string;
   cancelText?: string;
+  footer?: React.ReactNode[];
 }) => {
   return (
     <ModalNextUI
@@ -37,17 +39,23 @@ const Modal = ({
             <ModalHeader className="flex flex-col gap-1">{title}</ModalHeader>
             <ModalBody>{children}</ModalBody>
             <ModalFooter>
-              <Button color="danger" variant="light" onPress={onClose}>
-                {cancelText}
-              </Button>
-              <Button
-                color="primary"
-                type="submit"
-                onPress={onConfirm}
-                isLoading={false}
-              >
-                {confirmText}
-              </Button>
+              {footer ? (
+                footer
+              ) : (
+                <>
+                  <Button color="danger" variant="light" onPress={onClose}>
+                    {cancelText}
+                  </Button>
+                  <Button
+                    color="primary"
+                    type="submit"
+                    onPress={onConfirm}
+                    isLoading={false}
+                  >
+                    {confirmText}
+                  </Button>
+                </>
+              )}
             </ModalFooter>
           </>
         )}

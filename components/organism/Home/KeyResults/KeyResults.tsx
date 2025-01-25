@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -22,10 +24,10 @@ const KeyResults = () => {
       <h2 className="my-4 bg-orange-500 text-white inline-block px-4 py-2 rounded-md">
         Key Issues
       </h2>
-      <div className="flex h-64 gap-x-4">
+      <div className="flex flex-col md:flex-row gap-4">
         {keyResults.map((item, index) => (
           <Link
-            className="flex-1 overflow-hidden relative"
+            className="flex-1 overflow-hidden relative h-64"
             key={index}
             href={`/articles?tags=${JSON.stringify(
               item.split(" & ").map((item) => item.toLowerCase())

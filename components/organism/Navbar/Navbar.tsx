@@ -121,17 +121,32 @@ const Header = () => {
       <NavbarMenu>
         {menus.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`} className="mb-4">
-            <p className="text-neutral-400 text-sm font-light">{item.label}</p>
-            {item.items.map((data) => (
+            {item.items.length > 0 ? (
+              <>
+                <p className="text-neutral-400 text-sm font-light">
+                  {item.label}
+                </p>
+                {item.items.map((data) => (
+                  <Link
+                    key={`${item.key}-${data.key}`}
+                    className="w-full text-yellow-600 mb-3"
+                    href={`/${data.key}`}
+                    size="lg"
+                  >
+                    {data.label}
+                  </Link>
+                ))}
+              </>
+            ) : (
               <Link
-                key={`${item.key}-${data.key}`}
+                key={`${item.key}`}
                 className="w-full text-yellow-600 mb-3"
-                href={`/${data.key}`}
+                href={`/${item.key}`}
                 size="lg"
               >
-                {data.label}
+                {item.label}
               </Link>
-            ))}
+            )}
           </NavbarMenuItem>
         ))}
       </NavbarMenu>

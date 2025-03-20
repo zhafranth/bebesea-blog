@@ -13,6 +13,7 @@ import dayjs from "dayjs";
 import { Post, User, Comment } from "@prisma/client";
 import useToggle from "@/utils/hooks/useToggle";
 import ModalComment from "./ModalComment";
+import { detailOptions } from "@/components/molecules/Card/utils/contentFormatter";
 
 const DetailBlog = () => {
   const router = useRouter();
@@ -46,7 +47,7 @@ const DetailBlog = () => {
         color="warning"
         onClick={() => router.back()}
       >
-        Kembali
+        Back
       </Button>
       <h2 className="sm:text-6xl text-4xl font-semibold text-slate-800 sm:my-12 my-8">
         {title}
@@ -58,7 +59,7 @@ const DetailBlog = () => {
           width={2262}
           height={1509}
           src={cover || "/images/sample-cover-card.jpeg"}
-          alt="Hero Detail Blog"
+          alt={title}
           className="w-full h-full object-cover"
           unoptimized
         />
@@ -118,7 +119,9 @@ const DetailBlog = () => {
       </div>
 
       <div className="flex gap-12 my-8">
-        <div className="flex-1">{htmlParser(content as string)}</div>
+        <div className="flex-1 leading-[2]">
+          {htmlParser(content as string, detailOptions)}
+        </div>
 
         <div className="w-[30%] sm:block hidden ">
           <div className="flex items-center self-start gap-x-4">
@@ -146,7 +149,6 @@ const DetailBlog = () => {
               variant="flat"
               radius="full"
               color="warning"
-              // className="bg-yellow-500 text-white"
             >
               <FaInstagram size={18} />
             </Button>
@@ -156,7 +158,6 @@ const DetailBlog = () => {
               variant="flat"
               radius="full"
               color="warning"
-              // className="bg-yellow-500 text-white"
             >
               <FaFacebook size={18} />
             </Button>
@@ -166,7 +167,6 @@ const DetailBlog = () => {
               variant="flat"
               radius="full"
               color="warning"
-              // className="bg-yellow-500 text-white"
             >
               <FaXTwitter size={18} />
             </Button>

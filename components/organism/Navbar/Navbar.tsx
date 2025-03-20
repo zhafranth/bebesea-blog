@@ -6,6 +6,7 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
+  Input,
   Link,
   NavbarBrand,
   NavbarContent,
@@ -15,13 +16,28 @@ import {
   NavbarMenuToggle,
   Navbar as NavbarUI,
 } from "@nextui-org/react";
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { menus } from "./menu.enum";
 import Image from "next/image";
+import { FaSearch } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [query, setQuery] = useState("");
+
+  const router = useRouter();
+
+  const handleSearch = useCallback(() => {
+    router.push(`/articles?search=${encodeURIComponent(query.trim())}`);
+  }, [query, router]);
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  };
 
   return (
     <NavbarUI
@@ -101,23 +117,18 @@ const Header = () => {
             </DropdownMenu>
           </Dropdown>
         ))}
-        {/* <Button
-          className="text-white bg-peach-500 text-xs px-4 py-2 rounded-md"
-          radius="sm"
-          // variant="light"
-        >
-          Join Us
-        </Button> */}
-        {/* <NavbarItem>
-          <Link
+        <NavbarItem>
+          <Input
+            placeholder="Search"
             size="sm"
-            className="text-white bg-yellow-600 text-xs px-4 py-2 rounded-md"
-            href="/auth"
-          >
-            Login
-          </Link>
-        </NavbarItem> */}
+            startContent={<FaSearch size={12} />}
+            className="w-[250px]"
+            onChange={(event) => setQuery(event.target.value)}
+            onKeyDown={handleKeyDown}
+          />
+        </NavbarItem>
       </NavbarContent>
+
       <NavbarMenu>
         {menus.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`} className="mb-4">

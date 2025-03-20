@@ -11,7 +11,7 @@ const Latest = () => {
   const { data: posts } = data ?? {};
 
   return (
-    <section id="articles" className="container">
+    <section id="articles" className="container my-28">
       <h2 className="text-center text-4xl mb-6 font-semibold text-orange-700">
         Stay Updated
       </h2>

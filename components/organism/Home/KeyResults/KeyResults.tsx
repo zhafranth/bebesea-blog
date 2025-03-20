@@ -6,12 +6,29 @@ import Link from "next/link";
 
 const KeyResults = () => {
   const keyResults = [
-    "Migration & Fishery Industry",
-    "Social & Health Protection",
-    "Migration & Gender",
+    {
+      id: 1,
+      label: "Sea-based Labour Migration",
+      key: ["sea based", "labour", "migration"],
+    },
+    {
+      id: 2,
+      label: "Health & Social Protection",
+      key: ["health", "social protection"],
+    },
+    {
+      id: 3,
+      label: "Gender & Migration",
+      key: ["gender", "migration"],
+    },
+    {
+      id: 4,
+      label: "Human Rights & Democracy",
+      key: ["human rights", "democracy"],
+    },
   ];
   return (
-    <main className="container mt-12">
+    <main className="container mb-28">
       <p className="text-lg md:text-xl md:leading-10">
         Human rights issues relating to{" "}
         <span className="text-orange-500">
@@ -30,18 +47,19 @@ const KeyResults = () => {
             className="flex-1 overflow-hidden relative h-64"
             key={index}
             href={`/articles?tags=${JSON.stringify(
-              item.split(" & ").map((item) => item.toLowerCase())
+              item.key.map((item) => item.toLowerCase())
             )}`}
           >
             <div className="absolute bottom-0 left-0 w-full h-full bg-gradient-to-t from-yellow-100 to-transparent flex p-5 items-end">
-              <p className="text-4xl font-semibold text-green-800">{item}</p>
+              <p className="text-2xl md:text-3xl font-semibold text-green-800">
+                {item.label}
+              </p>
             </div>
-
             <Image
               unoptimized
               width={2262}
               height={1509}
-              src={`/images/keyresult/kr-${index + 1}.jpg`}
+              src={`/images/keyresult/kr-${item.id}.jpg`}
               alt="Hero Background"
               className="w-full h-full object-cover"
             />

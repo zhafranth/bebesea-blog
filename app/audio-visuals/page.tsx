@@ -2,23 +2,16 @@
 
 import React from "react";
 import { useGetPostsList } from "../actions/hooks";
-import Image from "next/image";
-import ListStoryFellowShip from "./components/ListStoryFellowShip";
 import dynamic from "next/dynamic";
 
 const CardList = dynamic(() => import("@/components/organism/CardList"), {
   ssr: false,
 });
 
-const Story = ({
-  searchParams,
-}: {
-  searchParams: { page: number; search: string; status: string; tags: string };
-}) => {
-  const { page = 1 } = searchParams;
+const AudioVisuals = () => {
   const { data, isLoading } = useGetPostsList({
-    category: "story",
-    page,
+    limit: 3,
+    tags: ["audio-visuals"],
   });
   const { data: posts = [], total = 0 } = data ?? {};
   return (
@@ -27,11 +20,10 @@ const Story = ({
         isLoading={isLoading}
         data={posts}
         total={total}
-        label="Stories"
-        isCenter={false}
+        label="Audio Visuals"
       />
     </main>
   );
 };
 
-export default Story;
+export default AudioVisuals;

@@ -9,9 +9,10 @@ const Articles = ({
 }: {
   searchParams: { page: number; search: string; status: string; tags: string };
 }) => {
-  const { tags } = searchParams;
+  const { tags, ...restParams } = searchParams;
   const { data, isLoading } = useGetPostsList({
     tags: tags ? JSON.parse(tags) : [],
+    ...restParams,
   });
   const { data: posts = [], total = 0 } = data ?? {};
 

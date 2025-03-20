@@ -44,11 +44,43 @@ export const menus = [
   {
     key: "story",
     label: "Stories",
-    items: [],
+    items: [
+      {
+        key: "story",
+        label: "Articles",
+        description: "Articles",
+      },
+      {
+        key: "audio-visuals",
+        label: "Audio-Visuals",
+        description: "Audio-Visuals",
+      },
+      {
+        key: "story-fellowship",
+        label: "Story Fellowship",
+        description: "Story Fellowship",
+      },
+    ],
   },
   {
     key: "publications",
     label: "Publications",
-    items: [],
+    items: [
+      {
+        key: "research-report",
+        label: "Research Reports",
+        description: "Research Reports",
+      },
+      {
+        key: "policy-papers",
+        label: "Policy Papers",
+        description: "Policy Papers",
+      },
+      {
+        key: "tools-resources",
+        label: "Tools and Resources",
+        description: "Tools and Resources",
+      },
+    ],
   },
 ];

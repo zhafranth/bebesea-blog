@@ -44,4 +44,28 @@ export const CATEGORY_OPTIONS = [
     key: "publications",
     label: "Publications",
   },
+  {
+    key: "press-release",
+    label: "Press Release",
+  },
+  {
+    key: "story",
+    label: "Story",
+  },
+  {
+    key: "audio-visuals",
+    label: "Audio Visuals",
+  },
+  {
+    key: "research-report",
+    label: "Research Report",
+  },
+  {
+    key: "policy-papers",
+    label: "Policy Papers",
+  },
+  {
+    key: "tools-resources",
+    label: "Tools and Resources",
+  },
 ];

@@ -6,7 +6,7 @@ import React from "react";
 const LoadingCard = () => {
   const totalLoading = [1, 2, 3];
   return (
-    <div className="flex gap-x-28 w-full">
+    <div className="flex flex-col md:flex-row gap-28 w-full">
       {totalLoading.map((item) => (
         <Card className="flex-1 space-y-5 p-4" radius="lg" key={item}>
           <Skeleton className="rounded-lg">
@@ -16,7 +16,7 @@ const LoadingCard = () => {
             <Skeleton className="w-3/5 rounded-lg">
               <div className="h-3 w-3/5 rounded-lg bg-default-200" />
             </Skeleton>
-            <Skeleton className="w-4/5 rounded-lg">
+            <Skeleton className=" w-4/5 rounded-lg">
               <div className="h-3 w-4/5 rounded-lg bg-default-200" />
             </Skeleton>
             <Skeleton className="w-2/5 rounded-lg">

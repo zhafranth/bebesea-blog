@@ -60,7 +60,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="flex self-baseline overflow-hidden w-full sm:w-auto">
-            <div className="flex gap-x-4 mt-3">
+            <div className="flex flex-wrap gap-4 mt-3">
               {socialMedia.map(({ href, icon }, index) => (
                 <Link href={href} target="_blank" key={`social-media-${index}`}>
                   <Button
@@ -74,14 +74,6 @@ const Footer = () => {
                 </Link>
               ))}
             </div>
-            {/* <input
-              type="text"
-              placeholder="Enter your email here"
-              className="rounded-l-xl p-3 outline-none text-xs w-full sm:w-auto"
-            />
-            <button className="text-xs p-4 rounded-r-xl bg-yellow-700 text-white">
-              SUBSCRIBE
-            </button> */}
           </div>
         </div>
       </div>

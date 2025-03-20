@@ -33,7 +33,7 @@ const Card = ({ data }: { data: Post }) => {
             width={2262}
             height={1509}
             src={cover || "/images/sample-cover-card.jpeg"}
-            alt="Hero Background"
+            alt={title}
             className="w-full h-full object-cover"
           />
         </div>

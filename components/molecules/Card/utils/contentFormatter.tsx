@@ -59,23 +59,23 @@ export const detailOptions: HTMLReactParserOptions = {
   replace: (domNode) => {
     const node = domNode as Element;
 
-    // REMOVE STYLE P
-    if (node.name === "p") {
-      return <p>{domToReact(node.children as DOMNode[], options)}</p>;
-    }
+    // // REMOVE STYLE P
+    // if (node.name === "p") {
+    //   return <p>{domToReact(node.children as DOMNode[], options)}</p>;
+    // }
 
-    // REMOVE STYLE P
-    if (node.attribs?.dir === "ltr") {
-      return <p>{domToReact(node.children as DOMNode[], options)}</p>;
-    }
+    // // REMOVE STYLE P
+    // if (node.attribs?.dir === "ltr") {
+    //   return <p>{domToReact(node.children as DOMNode[], options)}</p>;
+    // }
 
     // REMOVE STYLE SPAN
-    if ((domNode as Element).name === "span") {
-      return (
-        <span>
-          {domToReact((domNode as Element).children as DOMNode[], options)}
-        </span>
-      );
-    }
+    // if ((domNode as Element).name === "span") {
+    //   return (
+    //     <span>
+    //       {domToReact((domNode as Element).children as DOMNode[], options)}
+    //     </span>
+    //   );
+    // }
   },
 };

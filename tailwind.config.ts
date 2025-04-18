@@ -16,6 +16,9 @@ const config: Config = {
           400: "#ffd2b6",
         },
       },
+      fontFamily: {
+        poppins: ["var(--font-poppins)"],
+      },
     },
     container: {
       center: true,

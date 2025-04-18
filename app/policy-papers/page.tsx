@@ -8,10 +8,16 @@ const CardList = dynamic(() => import("@/components/organism/CardList"), {
   ssr: false,
 });
 
-const PolicyPapers = () => {
+const PolicyPapers = ({
+  searchParams,
+}: {
+  searchParams: { page: number; search: string; status: string; tags: string };
+}) => {
+  const { page = 1 } = searchParams;
   const { data, isLoading } = useGetPostsList({
-    limit: 3,
-    tags: ["policy-papers"],
+    limit: 20,
+    page,
+    category: "policy-papers",
   });
   const { data: posts = [], total = 0 } = data ?? {};
   return (

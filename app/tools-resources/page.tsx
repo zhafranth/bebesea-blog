@@ -8,10 +8,16 @@ const CardList = dynamic(() => import("@/components/organism/CardList"), {
   ssr: false,
 });
 
-const ToolsResources = () => {
+const ToolsResources = ({
+  searchParams,
+}: {
+  searchParams: { page: number; search: string; status: string; tags: string };
+}) => {
+  const { page = 1 } = searchParams;
   const { data, isLoading } = useGetPostsList({
-    limit: 3,
-    tags: ["tools-resources"],
+    limit: 15,
+    page,
+    category: "tools-resources",
   });
   const { data: posts = [], total = 0 } = data ?? {};
   return (

@@ -9,9 +9,16 @@ const CardList = dynamic(() => import("@/components/organism/CardList"), {
   ssr: false,
 });
 
-const StoryFellowship = () => {
+const StoryFellowship = ({
+  searchParams,
+}: {
+  searchParams: { page: number; search: string; status: string; tags: string };
+}) => {
+  const { page = 1 } = searchParams;
+
   const { data, isLoading } = useGetPostsList({
-    limit: 3,
+    limit: 15,
+    page,
     category: "story-fellowship",
   });
   const { data: posts = [], total = 0 } = data ?? {};

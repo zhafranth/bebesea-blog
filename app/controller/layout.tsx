@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import Sidebar from "./components/Sidebar/Sidebar";
-import { Open_Sans } from "next/font/google";
+import { Open_Sans, Poppins } from "next/font/google";
 import NextAuthProvider from "@/utils/NextAuthProvider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -12,6 +12,11 @@ import useProfile from "@/utils/hooks/useProfile";
 const OpenSans = Open_Sans({
   weight: ["300", "400", "500", "600", "700", "800"],
   subsets: ["latin"],
+});
+const poppins = Poppins({
+  weight: ["300", "400", "500", "600", "700", "800"],
+  subsets: ["latin"],
+  variable: "--font-poppins",
 });
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
@@ -26,7 +31,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <NextAuthProvider>
-      <main className={`flex h-screen ${OpenSans.className}`}>
+      <main
+        className={`flex h-screen ${OpenSans.className} ${poppins.variable}`}
+      >
         <Sidebar />
         <div className="flex-1 max-h-screen overflow-y-scroll">{children}</div>
       </main>

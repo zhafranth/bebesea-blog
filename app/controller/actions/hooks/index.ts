@@ -6,6 +6,7 @@ import {
   createUser,
   createVideo,
   delComment,
+  deleteUser,
   delPost,
   delVideo,
   getInstagram,
@@ -16,6 +17,7 @@ import {
   getUsers,
   getVideos,
   updatePost,
+  updateUser,
   updateVideo,
 } from "../networks";
 import {
@@ -46,14 +48,29 @@ export const useUser = () => {
     },
   });
 
-  // const { mutate: mutateDeletePost, isPending: pendingDelete } = useMutation({
-  //   mutationFn: (id: string) => delPost(id),
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries({ queryKey: ["table-list"] });
-  //   },
-  // });
+  const { mutate: mutateUpdateUser, isPending: pendingUpdate } = useMutation({
+    mutationFn: ({ id, data }: { id: string; data: UserPayload }) =>
+      updateUser(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["table-list", "users"] });
+    },
+  });
 
-  return { mutateCreateUser, pendingCreate };
+  const { mutate: mutateDeleteUser, isPending: pendingDelete } = useMutation({
+    mutationFn: (id: string) => deleteUser(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["table-list", "users"] });
+    },
+  });
+
+  return {
+    mutateCreateUser,
+    mutateDeleteUser,
+    mutateUpdateUser,
+    pendingUpdate,
+    pendingDelete,
+    pendingCreate,
+  };
 };
 
 export const usePost = () => {

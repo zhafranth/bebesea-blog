@@ -27,7 +27,7 @@ const Story = ({
         isLoading={isLoading}
         data={posts}
         total={total}
-        label="Stories"
+        label="Articles"
         isCenter={false}
       />
     </main>

@@ -49,6 +49,39 @@ export const actionCreateUser = async (data: UserPayload) => {
   }
 };
 
+export const actionDelUser = async (id: string) => {
+  try {
+    await prisma.user.delete({
+      where: {
+        id,
+      },
+    });
+    return {
+      status: 200,
+      message: "Success remove user",
+    };
+  } catch (error) {
+    throw new Error("Failed to fetch users data");
+  }
+};
+
+export const actionUpdateUser = async (data: UserPayload, id: string) => {
+  try {
+    await prisma.user.update({
+      where: {
+        id,
+      },
+      data,
+    });
+    return {
+      status: 200,
+      message: "Success edit user",
+    };
+  } catch (error) {
+    throw new Error("Failed to edit posts");
+  }
+};
+
 // POSTS ACTION ================================
 
 export const actionCreatePost = async (data: PostPayload) => {

@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* .reset-tw,
-.reset-tw * {
-  all: initial !important;
-} */
-
 .jodit-workplace,
 .jodit-react-container,
 .jodit-toolbar-button__text {

@@ -12,6 +12,7 @@ const Articles = ({
   const { tags, ...restParams } = searchParams;
   const { data, isLoading } = useGetPostsList({
     tags: tags ? JSON.parse(tags) : [],
+    limit: 15,
     ...restParams,
   });
   const { data: posts = [], total = 0 } = data ?? {};

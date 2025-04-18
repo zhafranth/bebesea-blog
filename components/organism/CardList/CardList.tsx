@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Pagination } from "@nextui-org/react";
 import Card from "@/components/molecules/Card/Card";
 import LoadingCard from "@/components/molecules/Loading/LoadingCard";
@@ -42,6 +42,12 @@ const CardList = ({
     [pathname, replace, searchParams]
   );
 
+  useEffect(() => {
+    if (searchParams.get("page")) {
+      setCurrentPage(parseInt(searchParams.get("page") as string));
+    }
+  }, [searchParams]);
+
   return (
     <>
       <TitleSection label={label} isCenter={isCenter} />
@@ -53,7 +59,7 @@ const CardList = ({
       </div>
       <div className="my-8 flex justify-center">
         <Pagination
-          total={Math.ceil(total / 20)}
+          total={Math.ceil(total / 15)}
           page={currentPage}
           color="warning"
           onChange={handleChangePage}

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import { NextUIProvider } from "@nextui-org/react";
 import Layout from "@/components/organism/Layout/Layout";
@@ -9,6 +9,11 @@ import "@js-temporal/polyfill";
 const inter = Inter({
   weight: ["300", "400", "700", "900"],
   subsets: ["latin"],
+});
+const poppins = Poppins({
+  weight: ["300", "400", "700", "900"],
+  subsets: ["latin"],
+  variable: "--font-poppins",
 });
 
 export const metadata: Metadata = {
@@ -24,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} ${poppins.variable}`}>
         <ReactQueryProvider>
           <NextUIProvider>
             <Layout>{children}</Layout>

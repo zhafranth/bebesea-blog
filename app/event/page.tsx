@@ -8,8 +8,17 @@ const CardList = dynamic(() => import("@/components/organism/CardList"), {
   ssr: false,
 });
 
-const Event = () => {
-  const { data, isLoading } = useGetPostsList({ limit: 3, category: "event" });
+const Event = ({
+  searchParams,
+}: {
+  searchParams: { page: number; search: string; status: string; tags: string };
+}) => {
+  const { page } = searchParams;
+  const { data, isLoading } = useGetPostsList({
+    limit: 15,
+    page,
+    category: "event",
+  });
   const { data: posts = [], total = 0 } = data ?? {};
   return (
     <main className="container">

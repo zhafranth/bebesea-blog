@@ -17,6 +17,8 @@ import {
   actionGetProfile,
   actionGetInstagram,
   actionCreateInstagram,
+  actionDelUser,
+  actionUpdateUser,
 } from "..";
 import {
   CommentPayload,
@@ -45,6 +47,16 @@ export const updatePost = async (data: PostPayload, id: string) => {
 
 export const createUser = async (data: UserPayload) => {
   const response = await actionCreateUser(data);
+  return response;
+};
+
+export const updateUser = async (id: string, data: UserPayload) => {
+  const response = await actionUpdateUser(data, id);
+  return response;
+};
+
+export const deleteUser = async (id: string) => {
+  const response = await actionDelUser(id);
   return response;
 };
 
